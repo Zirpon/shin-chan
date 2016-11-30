@@ -1,11 +1,10 @@
 <?php
 
-define("LOGGERPATH", "/home/wwwroot/default/shin-chan/");
+define("LOGGERPATH", "/var/log/shin-chan/");
 	
 $LOGGER_TYPE = array
 (
-	"taobao"	=> LOGGERPATH."taobao_debug.log",
-	"jingdong"	=> LOGGERPATH."jingdong_debug.log"
+	"account"	=> LOGGERPATH."account_".date("Y-m-d").".log",
 );
 
 $LOGGER_SWITCH = TRUE;
