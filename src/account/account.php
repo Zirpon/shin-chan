@@ -1,16 +1,20 @@
 <?php
-	require_once dirname(__FILE__).'/../../db/db_mysql.php';
-	require_once dirname(__FILE__).'/../../log/logger.php';
-	require_once dirname(__FILE__).'/../../utils/handler.php';
-	//require_once dirname(__FILE__).'/../../utils/packet.php';
+	require_once dirname(__FILE__).'/../db/db_mysql.php';
+	require_once dirname(__FILE__).'/../log/logger.php';
+	require_once dirname(__FILE__).'/../utils/handler.php';
 
 	define("dayu", 1);
+	define("guest", 2);
 
 	class account extends handler
 	{
 		public function newAccount($account, $pwd, $type)
 		{
 			$db = new db_mysql("shin_chan");
+
+			if (dayu === $type && empty($pwd)) {
+				return -1;
+			}
 
 			$arr = array($account, md5($pwd), $type, time());
   			$result =  $db->db_proc("proc_new_account", $arr);
@@ -78,7 +82,7 @@
 			logger::write("newChar error: ".$account." ".$type." ".$charname." ".$rows["guid"], "account");
 			return -1;			
 		}
-		
+
 		public function login( $account, $type )
 		{
 			$db = new db_mysql();
