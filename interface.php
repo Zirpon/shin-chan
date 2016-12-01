@@ -8,17 +8,26 @@
 	//$json_obj = json_decode($params["packet"]);
 
 	//$arr = array(1000000004, 1000000005, 5, "hello world");
-	$arr = array(1000000005, 1);
+	$arr = array(1000000005, 1000000004);
 	$handler = NULL;
 
 	if ($params["handler"] === "account" ) {
 		include  account;
 		$handler = new account();		
 	}
-	if ($params["handler"] === "message" ) {
+	else if ($params["handler"] === "message" ) {
 		include  message;
 		$handler = new message();		
 	}
+	else if ($params["handler"] === "friend" ) {
+		include  friend;
+		$handler = new friend();		
+	}
+	else
+	{
+		echo "handler error";
+	}
+
 
 	$function = $GLOBALS["handlers"][$params["handler"]][$params["findex"]];
 

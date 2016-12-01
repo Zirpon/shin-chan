@@ -15,6 +15,7 @@
 				return -1;
 			}
 
+			//send msg counter ++
 			$db = new db_mysql();
 			$conn = $db->db_getConn();
 	        $stmt = $conn->prepare(newMesssage);
@@ -32,7 +33,7 @@
 			{
 				return -1;
 			}
-
+			//filter the deadline msg and set isvalid to false
 			$db = new db_mysql();
 			$sql = "select * from t_msgqueue where isvalid = 1 and (senderid = ".$guid." or receiverid = ".$guid.");";
 			$result = $db->db_query_select($sql);
@@ -79,34 +80,42 @@
 			}
 
 			$msg = self::getMsg($msgid);
+			//var_dump($msg);
 
-			if ($msg === NULL || intval($msg["receiverid"]) !== $guid) {
+			if ($msg === NULL || intval($msg["receiverid"]) !== $guid || intval($msg['isvalid']) === 0) {
 				return -2;
 			}
 
 			switch ($msg["type"]) {
 				case eMsgType_addFriend:
 					{
-						friend::createFriend($msg["senderid"], $msg["receiverid"]);
-						self::readMsg($msgid);
+						if ( 0 === friend::createFriend($msg["senderid"], $msg["receiverid"]) )
+						{
+							self::readMsg($msgid);
+						}
 					}
-
 					break;
+				/*
 				case eMsgType_sendGift:
 					{
-						friend::sendGift();
+						friend::sendGift($msg["senderid"], $msg["receiverid"]);
 						self::readMsg($msgid);
 					}
 					break;
+				*/
 				case eMsgType_requestGift:
 					{
-						friend::requestGift();
-						self::readMsg($msgid);
+						//receiver handle this msg with sending gift back
+						if ( 0 === friend::sendGift($msg["senderid"], $msg["receiverid"]) )
+						{
+							self::readMsg($msgid);
+						}
 					}
 					break;
+
 				case eMsgType_sendMsg:
 					{
-						//friend::sendMsg();
+						friend::sendMsg();
 						self::readMsg($msgid);
 					}
 					break;
@@ -115,7 +124,8 @@
 					logger::error("readMsg error: ".$guid." ".$msgid." ".$row['type'], __CLASS__);
 					break;
 			}
-	
+			
+			return 0;
 		}
 	}
 ?>

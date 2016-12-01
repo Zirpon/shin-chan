@@ -34,7 +34,7 @@ $GLOBALS['DB_SOCKET']  = "/data/lib/mysql/mysql.sock";
             exit();
         }
         */
-        echo "连接成功<br>";
+        //echo "连接成功<br>";
     }
 
     public function __destruct()
@@ -43,7 +43,7 @@ $GLOBALS['DB_SOCKET']  = "/data/lib/mysql/mysql.sock";
             $this->m_conn->close();
         }
       
-        echo "<br>当对象销毁时会调用！！！<br>";
+        //echo "<br>当对象销毁时会调用！！！<br>";
     }
 
     public function db_query_insert( $sql_str )
@@ -53,7 +53,7 @@ $GLOBALS['DB_SOCKET']  = "/data/lib/mysql/mysql.sock";
         }
 
         if ($this->m_conn->query($sql_str) === TRUE) {
-            echo "新记录插入成功";
+            //echo "新记录插入成功";
             return TRUE;
         } else {
             echo "Error: " . $sql_str . "<br>" . $this->m_conn->error;

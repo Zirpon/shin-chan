@@ -4,9 +4,11 @@
 							values ( ?, ?, ?, 0, 1, ?, ?);");
 	define("readMsg",	"update t_msgqueue set isvalid = 0 where id = ?;");
 
-	define("createfriend", "insert into t_friend (playerid, friendid) values (?, ?);");
-
-
+	define("createfriend", "insert into t_friend (playerid, friendid, isvalid) values (?, ?, 1);");
+	define("makeupfriend", "update t_friend set isvalid = 1 where playerid = ? and friendid = ?;");
+	define("unfriend", "update t_friend set isvalid = 0 where playerid = ? and friendid = ?;");
+	define("sendGift",	"insert into t_friendgift (type, sourceId, targetId, title, content, gift, send_time, dead_time, status) 
+						values (0, ?, ?, ?, ?, ?, ?, ?, 0);");
 
 //////////////////////////////////////////////////////////////////////////////////////	
 	$sqlmould = array(
@@ -14,5 +16,8 @@
 		"newMesssage" => "iiisi",
 		"readMsg" => "i",
 		"createfriend" => "ii",
+		"makeupfriend" => "ii",
+		"unfriend" => "ii",
+		"sendGift" => "iisssii",
 	);
 ?>

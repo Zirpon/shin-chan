@@ -14,5 +14,13 @@
 		//	2008	=> "readMsg",
 			2009	=> "handleMsg",
 		),
+
+		"friend"	=> array(
+			2010	=> "createFriend",
+			2011	=> "sendGift",
+			2012	=> "unfriend",
+			2013	=> "requestGift",
+			2014	=> "sendMsg",
+		),
 	);
 ?>
