@@ -119,6 +119,11 @@
 						self::readMsg($msgid);
 					}
 					break;
+				case eMsgType_sendMail:
+					{
+						//
+					}
+					break;
 				
 				default:
 					logger::error("readMsg error: ".$guid." ".$msgid." ".$row['type'], __CLASS__);
