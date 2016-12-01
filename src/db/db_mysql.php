@@ -1,5 +1,8 @@
 <?php
 
+require_once dirname(__FILE__).'/sqlmould.php';
+
+
 $GLOBALS['DB_IP']   = "localhost";
 $GLOBALS['DB_USER'] = "root";
 $GLOBALS['DB_PWD']  = "";
@@ -66,6 +69,9 @@ $GLOBALS['DB_SOCKET']  = "/data/lib/mysql/mysql.sock";
         }
 
         $result = $this->m_conn->query($sql_str);
+        if ($result == FALSE) {
+            return NULL;
+        }
 
         return $result;
 

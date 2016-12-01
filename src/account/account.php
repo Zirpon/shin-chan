@@ -21,7 +21,7 @@
 
   			$row = $result->fetch_assoc();
   			if ( $row["result"] < 0 ) {
-  				
+  				//account exists
   				$result->free();
   				logger::error("newAccount error: ".$account." ".$pwd."|".md5($pwd)." ".$type, "account");
   				return -2;
@@ -63,6 +63,8 @@
 			$result = $db->db_proc("proc_get_charlist", $arr);
 
 			$rows = $result->fetch_assoc();
+			//var_dump($rows);
+			//echo "<br>hello<br>";
 			if ( $rows["guid"] == 0 ) {
 				$result->free();
 				$db->db_cleanQuery();
@@ -73,7 +75,7 @@
 				$rows = $result->fetch_assoc();
 				//var_dump($rows);
 				//echo "<br>";
-				if ($rows["result"] == 1 && strlen($rows["rguid"]) === 13) {
+				if ($rows["result"] == 1 && intval($rows["rguid"]) > 0) {
 					logger::write("newChar success: ".$account." ".$type." ".$charname." ".$rows["rguid"], "account");
 					return $rows["rguid"];
 				}
@@ -94,10 +96,31 @@
 			//var_dump($rows);
 			if ($rows["guid"] != 0) {
 				$result->free();
+				
+				$db->db_cleanQuery();
+				$sql = "update t_char set logintime = ".time()." where guid = ".$rows['guid'];
+				$result = $db->db_query_select($sql);
+				logger::write("login success: ".$account." ".$type." ".$rows['guid'], __CLASS__);
+				//var_dump($result);
 				return $rows["guid"];
 			}
 
 			return -1;
+		}
+
+		public function bExistsChar( $guid )
+		{
+			$db = new db_mysql();
+
+			$result = $db->db_query_select(bExistsCharByGuid.$guid);
+
+			if (isset($result) && $result->num_rows > 0) {
+				$rows = $result->fetch_row();
+				if (intval($rows[0]) > 0) {
+					return TRUE;	
+				}
+			}
+			return FALSE;
 		}
 	}
 
