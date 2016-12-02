@@ -5,22 +5,31 @@
 			2002	=> "checkAccount",
 			2003	=> "newChar",
 			2004	=> "login",
+			2005	=> "bExistsChar",
+			2006	=> "sGetCharname",
 		),
 
 		"message"	=> array(
-			2005	=> "newMsg",
-			2006	=> "getMsgList",
-		//	2007	=> "getMsg",
-		//	2008	=> "readMsg",
-			2009	=> "handleMsg",
+			2011	=> "newMsg",
+			2012	=> "getMsgList",
+		//	2013	=> "getMsg",
+		//	2014	=> "readMsg",
+			2015	=> "handleMsg",
 		),
 
 		"friend"	=> array(
-			2010	=> "createFriend",
-			2011	=> "sendGift",
-			2012	=> "unfriend",
-			2013	=> "requestGift",
-			2014	=> "sendMsg",
+			2021	=> "createFriend",
+			2022	=> "sendGift",
+			2023	=> "unfriend",
+			2024	=> "requestGift",
+			2025	=> "sendMsg",
+		),
+
+		"mail"		=> array(
+			2031	=> "sendMail",
+			2032	=> "loadMail",
+			2033	=> "readMail",
+			2034	=> "loadMailList",
 		),
 	);
 ?>

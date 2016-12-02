@@ -8,7 +8,7 @@
 	//$json_obj = json_decode($params["packet"]);
 
 	//$arr = array(1000000004, 1000000005, 5, "hello world");
-	$arr = array(1000000005, 1000000004);
+	$arr = array(1000000004,2);
 	$handler = NULL;
 
 	if ($params["handler"] === "account" ) {
@@ -22,6 +22,10 @@
 	else if ($params["handler"] === "friend" ) {
 		include  friend;
 		$handler = new friend();		
+	}
+	else if ($params["handler"] === "mail" ) {
+		include  mail;
+		$handler = new mail();		
 	}
 	else
 	{

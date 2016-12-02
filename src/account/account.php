@@ -112,7 +112,7 @@
 		{
 			$db = new db_mysql();
 
-			$result = $db->db_query_select(bExistsCharByGuid.$guid);
+			$result = $db->db_query_select(nExistsCharByGuid.$guid);
 
 			if (isset($result) && $result->num_rows > 0) {
 				$rows = $result->fetch_row();
@@ -121,6 +121,21 @@
 				}
 			}
 			return FALSE;
+
+		}
+
+		public function sGetCharname($guid)
+		{
+			$db = new db_mysql();
+
+			$result = $db->db_query_select(sGetCharnameByGuid.$guid);
+
+			if (isset($result) && $result->num_rows > 0) {
+				$rows = $result->fetch_row();
+				return $rows[0];	
+			}
+			return NULL;
+
 		}
 	}
 

@@ -83,6 +83,7 @@
 			//var_dump($msg);
 
 			if ($msg === NULL || intval($msg["receiverid"]) !== $guid || intval($msg['isvalid']) === 0) {
+				logger::error("handleMsg error: ".json_encode($msg)." ".$guid, __CLASS__);
 				return -2;
 			}
 
@@ -95,21 +96,24 @@
 						}
 					}
 					break;
-				/*
-				case eMsgType_sendGift:
-					{
-						friend::sendGift($msg["senderid"], $msg["receiverid"]);
-						self::readMsg($msgid);
-					}
-					break;
-				*/
+
 				case eMsgType_requestGift:
 					{
-						//receiver handle this msg with sending gift back
-						if ( 0 === friend::sendGift($msg["senderid"], $msg["receiverid"]) )
-						{
-							self::readMsg($msgid);
+						$sendername = account::sGetCharname($msg["senderid"]);
+						$receivername = account::sGetCharname($msg["receiverid"]);
+
+						if ($sendername === NULL || $receivername === NULL) {
+							return -3;
 						}
+
+						//receiver handle this msg with sending gift back
+						$result = friend::sendGift($msg["senderid"], $sendername, $msg["receiverid"], $receivername);
+						if ( 0 !==  $result )
+						{
+							return -4;
+						}
+						
+						self::readMsg($msgid);
 					}
 					break;
 
@@ -117,11 +121,6 @@
 					{
 						friend::sendMsg();
 						self::readMsg($msgid);
-					}
-					break;
-				case eMsgType_sendMail:
-					{
-						//
 					}
 					break;
 				
