@@ -35,6 +35,8 @@
 	   			return -2;
 	   		}
 
+	   		logger::write("sendmail success:".$type."|".$sourceid."|".$sourcename."|".$receiverid."|".$receivername, __CLASS__);
+
 	        return 0;
 		}
 
@@ -73,6 +75,8 @@
 	        $stmt->bind_param($GLOBALS['sqlmould']["readmail"], $mailid);
 	        $stmt->execute();	        
 	        $stmt->close();
+
+	        logger::write("sendmail success:".$playerid."|".$mailid, __CLASS__);
 
 	        return 0;
 		}

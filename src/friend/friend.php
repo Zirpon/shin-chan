@@ -16,6 +16,12 @@
 			$format = "createfriend";
 
 			$stmt = $db->db_getConn()->prepare($sql);
+	        
+	        if (!is_object($stmt)) {
+	   			logger::error("newMsg error:".$playerid."|".$friendid." ".$db->get_getConn()->error, __CLASS__);
+	   			return -2;
+			}
+
 	        $stmt->bind_param($GLOBALS['sqlmould'][$format], $playerid, $friendid);
    	        $result = $stmt->execute();
    	        if (empty($result)) {
@@ -25,6 +31,12 @@
    	        }
 
 			$stmt = $db->db_getConn()->prepare($sql);
+
+	        if (!is_object($stmt)) {
+	   			logger::error("newMsg error:".$playerid."|".$friendid." ".$db->get_getConn()->error, __CLASS__);
+	   			return -2;
+			}
+
 	        $stmt->bind_param($GLOBALS['sqlmould'][$format], $playerid, $friendid);
    	        $result = $stmt->execute();
 
@@ -33,6 +45,8 @@
 	        $friendid = $tmp;
 	        $b = $stmt->execute();
 	        $stmt->close();
+
+	        logger::write("createfriend success: "$playerid."|".$friendid, __CLASS__);
 
 	        return 0;
 		}
@@ -61,6 +75,11 @@
 			$db = new db_mysql();
 			$stmt = $db->db_getConn()->prepare(unfriend);
 
+	        if (!is_object($stmt)) {
+	   			logger::error("newMsg error:".$playerid."|".$friendid." ".$db->get_getConn()->error, __CLASS__);
+	   			return -2;
+			}
+
 	        $stmt->bind_param($GLOBALS['sqlmould']["unfriend"], $playerid, $friendid);
 	        $stmt->execute();
 
@@ -69,6 +88,8 @@
 	        $friendid = $tmp;
 	        $b = $stmt->execute();		        
 	        $stmt->close();
+
+	        logger::write("unfriend success: ".$playerid."|".$friendid, __CLASS__);
 
 	        return 0;
 

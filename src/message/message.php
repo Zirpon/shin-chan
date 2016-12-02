@@ -19,10 +19,18 @@
 			$db = new db_mysql();
 			$conn = $db->db_getConn();
 	        $stmt = $conn->prepare(newMesssage);
+
+	        if (!is_object($stmt)) {
+	   			logger::error("newMsg error:".$senderid."|".$receiverid." ".$db->get_getConn()->error, __CLASS__);
+	   			return -2;
+			}
+
 	        //var_dump($stmt);
 	        $stmt->bind_param($GLOBALS['sqlmould']["newMesssage"], $senderid, $receiverid, $type, $content, $deadline);
 	        $stmt->execute();
 	        $stmt->close();
+
+	        logger::write("newMsg success:".$senderid."|".$receiverid."|".$type."|".$content."|".$deadline, __CLASS__);
 
 			return 0;
 		}
@@ -33,6 +41,7 @@
 			{
 				return -1;
 			}
+
 			//filter the deadline msg and set isvalid to false
 			$db = new db_mysql();
 			$sql = "select * from t_msgqueue where isvalid = 1 and (senderid = ".$guid." or receiverid = ".$guid.");";
@@ -67,9 +76,16 @@
 			$db = new db_mysql();
  			$stmt = $db->db_getConn()->prepare(readMsg);
 	        $stmt->bind_param($GLOBALS['sqlmould']["readMsg"], $msgid);
+	        if (!is_object($stmt)) {
+	   			logger::error("readMsg error:".$msgid." ".$db->get_getConn()->error, __CLASS__);
+	   			return -1;
+			}
 	        $stmt->execute();
 	        $stmt->close();
 
+	   		logger::write("readMsg success:".$msgid, __CLASS__);
+
+	        return 0;
 		}
 
 		public function handleMsg( $guid, $msgid )
@@ -87,13 +103,18 @@
 				return -2;
 			}
 
+			logger::write("handleMsg : ".json_encode($msg)."|".$guid, __CLASS__);
+
 			switch ($msg["type"]) {
 				case eMsgType_addFriend:
 					{
-						if ( 0 === friend::createFriend($msg["senderid"], $msg["receiverid"]) )
+						$result = friend::createFriend($msg["senderid"], $msg["receiverid"]);
+						if ( 0 !== $result )
 						{
-							self::readMsg($msgid);
+							return -4;
 						}
+						
+						self::readMsg($msgid);
 					}
 					break;
 
