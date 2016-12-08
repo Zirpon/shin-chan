@@ -13,24 +13,27 @@
 			$db = new db_mysql("shin_chan");
 
 			if (dayu === $type && empty($pwd)) {
-				return -1;
+				return response::format(ERROR_PARAMS, "$account $type: empty pwd");
 			}
 
 			$arr = array($account, md5($pwd), $type, time());
   			$result =  $db->db_proc("proc_new_account", $arr);
 
+  			if (!is_object($result)) {
+  				return responce::format(ERROR_MYSQL, "$account $pwd $type $result is null");
+  			}
   			$row = $result->fetch_assoc();
   			if ( $row["result"] < 0 ) {
   				//account exists
   				$result->free();
   				logger::error("newAccount error: ".$account." ".$pwd."|".md5($pwd)." ".$type, "account");
-  				return -2;
+				return responce::format(ERROR_MYSQL, "$account type $type: exists account");
   			}
 
   			$result->free();
   			logger::write("newAccount success: ".$account." ".$pwd."|".md5($pwd)." ".$type, "account");
   			
-  			return 0;	
+			return responce::format(ERROR_OK, __CLASS__.":OK");
 		}
 
 		public function checkAccount($account, $pwd, $type)
@@ -46,13 +49,13 @@
   				
   				$result->free();
   				logger::error("checkAccount error: ".$account." ".$pwd."|".md5($pwd)." ".$type, "account");
-  				return 0;
+				return responce::format(ERROR_FALSE, "no account or pwd error");
   			}
 
   			$result->free();
 
 			logger::write("checkAccount success: ".$account." ".$pwd."|".md5($pwd)." ".$type, "account");
-	  		return 1;
+			return responce::format(ERROR_TRUE, "account exists");
 		} 
 
 		public function newChar($account, $type, $charname)
@@ -77,12 +80,12 @@
 				//echo "<br>";
 				if ($rows["result"] == 1 && intval($rows["rguid"]) > 0) {
 					logger::write("newChar success: ".$account." ".$type." ".$charname." ".$rows["rguid"], "account");
-					return $rows["rguid"];
+					return responce::format(ERROR_OK, $rows["rguid"]);
 				}
 			}
 
 			logger::write("newChar error: ".$account." ".$type." ".$charname." ".$rows["guid"], "account");
-			return -1;			
+			return responce::format(ERROR_MYSQL, "account got char");
 		}
 
 		public function login( $account, $type )
@@ -102,10 +105,10 @@
 				$result = $db->db_query_select($sql);
 				logger::write("login success: ".$account." ".$type." ".$rows['guid'], __CLASS__);
 				//var_dump($result);
-				return $rows["guid"];
+				return responce::format(ERROR_OK, $rows["guid"]);
 			}
 
-			return -1;
+			return responce::format(ERROR_MYSQL, "account got char");
 		}
 
 		public function bExistsChar( $guid )

@@ -12,7 +12,7 @@
 		{	
 			if ( !account::bExistsChar($senderid) || !account::bExistsChar($receiverid) 
 				|| $type > eMsgType_end ) {
-				return -1;
+				return response::format(ERROR_PARAMS, "$senderid $receiverid $type error");
 			}
 
 			//send msg counter ++
@@ -22,7 +22,7 @@
 
 	        if (!is_object($stmt)) {
 	   			logger::error("newMsg error:".$senderid."|".$receiverid." ".$db->get_getConn()->error, __CLASS__);
-	   			return -2;
+				return response::format(ERROR_MYSQL, "db sql error");
 			}
 
 	        //var_dump($stmt);
@@ -32,14 +32,14 @@
 
 	        logger::write("newMsg success:".$senderid."|".$receiverid."|".$type."|".$content."|".$deadline, __CLASS__);
 
-			return 0;
+			return response::format(ERROR_OK, "send msg ok");
 		}
 
 		public function getMsgList( $guid )
 		{
 			if ( !account::bExistsChar($guid) ) 
 			{
-				return -1;
+				return response::format(ERROR_PARAMS, $guid);
 			}
 
 			//filter the deadline msg and set isvalid to false
@@ -52,10 +52,10 @@
 					$msgList[] = $row;
 				}
 				//var_dump($msgList);
-				return json_encode($msgList);
+				return response::format(ERROR_OK, json_encode($msgList));
 			}
 
-			return -2;
+			return response::format(ERROR_MYSQL, "no msg");
 		}
 
 		public function getMsg( $msgid )
@@ -92,7 +92,7 @@
 		{
 			if ( !account::bExistsChar($guid) ) 
 			{
-				return -1;
+				return response::format(ERROR_PARAMS, "guid error ".$guid);
 			}
 
 			$msg = self::getMsg($msgid);
@@ -100,7 +100,7 @@
 
 			if ($msg === NULL || intval($msg["receiverid"]) !== $guid || intval($msg['isvalid']) === 0) {
 				logger::error("handleMsg error: ".json_encode($msg)." ".$guid, __CLASS__);
-				return -2;
+				return response::format(ERROR_PARAMS, "msgid or guid error ".$msgid." ".$guid);
 			}
 
 			logger::write("handleMsg : ".json_encode($msg)."|".$guid, __CLASS__);
@@ -111,7 +111,8 @@
 						$result = friend::createFriend($msg["senderid"], $msg["receiverid"]);
 						if ( 0 !== $result )
 						{
-							return -4;
+							logger::write("handleMsg : create friend error $result", __CLASS__);
+							return response::format(ERROR_MYSQL, "create friend error");
 						}
 						
 						self::readMsg($msgid);
@@ -124,14 +125,16 @@
 						$receivername = account::sGetCharname($msg["receiverid"]);
 
 						if ($sendername === NULL || $receivername === NULL) {
-							return -3;
+							logger::write("handleMsg : names error $sendername $receivername", __CLASS__);
+							return response::format(ERROR_MYSQL, "names error");
 						}
 
 						//receiver handle this msg with sending gift back
 						$result = friend::sendGift($msg["senderid"], $sendername, $msg["receiverid"], $receivername);
 						if ( 0 !==  $result )
 						{
-							return -4;
+							logger::write("handleMsg : send gift error", __CLASS__);
+							return response::format(ERROR_MYSQL, "send gift error");
 						}
 						
 						self::readMsg($msgid);
@@ -150,7 +153,7 @@
 					break;
 			}
 			
-			return 0;
+			return response::format(ERROR_OK);
 		}
 	}
 ?>

@@ -8,7 +8,7 @@
 		{
 			if ( !account::bExistsChar($sourceid) || !account::bExistsChar($receiverid) ) 
 			{
-				return -1;
+				return response::format(ERROR_PARAM, "id error $sourceid $receiverid");
 			}
 
 			$db = new db_mysql();
@@ -32,12 +32,12 @@
 	   		{
 	   			logger::error("sendmail error:".$type."|".$sourceid."|".$sourcename."|".$receiverid."|".$receivername." "
 	   										.$db->get_getConn()->error, __CLASS__);
-	   			return -2;
+				return response::format(ERROR_MYSQL, "db sql error");
 	   		}
 
 	   		logger::write("sendmail success:".$type."|".$sourceid."|".$sourcename."|".$receiverid."|".$receivername, __CLASS__);
 
-	        return 0;
+			return response::format(ERROR_OK);
 		}
 
 		public function loadMail($mailid)
@@ -56,20 +56,20 @@
 		{
 			if ( !account::bExistsChar($playerid) ) 
 			{
-				return -1;
+				return response::format(ERROR_PARAM, "no $playerid");
 			}
 
 			$mail = self::loadMail($mailid);
 			if ( $mail === NULL || intval($mail['targetId']) !== $playerid ) {
 	   			logger::error("readMail error:".$playerid."|".$mailid."|".json_encode($mail), __CLASS__);
-				return -2;
+				return response::format(ERROR_MYSQL, "$mailid error");
 			}
 
 			$db = new db_mysql();
 			$stmt = $db->db_getConn()->prepare(readmail);
 			if (!is_object($stmt)) {
 	   			logger::error("sendmail error:".$playerid."|".$mailid." ".$db->get_getConn()->error, __CLASS__);
-				return -3;
+				return response::format(ERROR_MYSQL, "db sql error");
 			}
 
 	        $stmt->bind_param($GLOBALS['sqlmould']["readmail"], $mailid);
@@ -78,14 +78,14 @@
 
 	        logger::write("sendmail success:".$playerid."|".$mailid, __CLASS__);
 
-	        return 0;
+			return response::format(ERROR_OK);
 		}
 
 		public function loadMailList($guid)
 		{
 			if ( !account::bExistsChar($guid) ) 
 			{
-				return -1;
+				return response::format(ERROR_PARAM, "no $guid");
 			}
 			//filter the deadline msg and set isvalid to false
 			$db = new db_mysql();
@@ -97,10 +97,10 @@
 					$msgList[] = $row;
 				}
 				//var_dump($msgList);
-				return json_encode($msgList);
+				return response::format(ERROR_OK, json_encode($msgList));
 			}
 
-			return -2;
+			return response::format(ERROR_MYSQL, "no mail");
 		}
 	}
 ?>

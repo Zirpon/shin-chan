@@ -5,8 +5,8 @@
 			2002	=> "checkAccount",
 			2003	=> "newChar",
 			2004	=> "login",
-			2005	=> "bExistsChar",
-			2006	=> "sGetCharname",
+			//2005	=> "bExistsChar",
+			//2006	=> "sGetCharname",
 		),
 
 		"message"	=> array(
@@ -27,7 +27,7 @@
 
 		"mail"		=> array(
 			2031	=> "sendMail",
-			2032	=> "loadMail",
+			//2032	=> "loadMail",
 			2033	=> "readMail",
 			2034	=> "loadMailList",
 		),

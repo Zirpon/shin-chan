@@ -3,12 +3,16 @@
 	include dirname(__FILE__).'/interface_define.php';
 	include dirname(__FILE__).'/src/utils/handler_define.php';
 
-	$params = $_REQUEST;
+	$params = $_GET;
+	$data	= $_POST;
 
-	//$json_obj = json_decode($params["packet"]);
+	//echo json_encode($params);
+	//$json_data =  json_encode($data);
+	if (!isset($params['handler']) || !isset($params['findex'])) {
+		echo "request error".json_encode($params)."\n";
+		return;
+	}
 
-	//$arr = array(1000000004, 1000000005, 5, "hello world");
-	$arr = array(1000000004,2);
 	$handler = NULL;
 
 	if ($params["handler"] === "account" ) {
@@ -29,12 +33,13 @@
 	}
 	else
 	{
-		echo "handler error";
+		echo "request error".json_encode($params)."\n";
+		return;
 	}
 
 
 	$function = $GLOBALS["handlers"][$params["handler"]][$params["findex"]];
 
-	$result = $handler->process($function, $arr);
-	echo $result;
+	$result = $handler->process($function, $data);
+	echo $result."\n";
 ?>

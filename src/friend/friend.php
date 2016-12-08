@@ -9,7 +9,7 @@
 		{
 			if ( !account::bExistsChar($playerid) || !account::bExistsChar($friendid) ) 
 			{
-				return -1;
+				return response::format(ERROR_PARAM, "id error $playerid $friendid");
 			}
 			$db = new db_mysql();
 			$sql = createfriend;
@@ -19,7 +19,7 @@
 	        
 	        if (!is_object($stmt)) {
 	   			logger::error("newMsg error:".$playerid."|".$friendid." ".$db->get_getConn()->error, __CLASS__);
-	   			return -2;
+				return response::format(ERROR_MYSQL, "db sql error");
 			}
 
 	        $stmt->bind_param($GLOBALS['sqlmould'][$format], $playerid, $friendid);
@@ -34,7 +34,7 @@
 
 	        if (!is_object($stmt)) {
 	   			logger::error("newMsg error:".$playerid."|".$friendid." ".$db->get_getConn()->error, __CLASS__);
-	   			return -2;
+				return response::format(ERROR_MYSQL, "db sql error");
 			}
 
 	        $stmt->bind_param($GLOBALS['sqlmould'][$format], $playerid, $friendid);
@@ -48,7 +48,7 @@
 
 	        logger::write("createfriend success: "$playerid."|".$friendid, __CLASS__);
 
-	        return 0;
+			return response::format(ERROR_OK);
 		}
 
 		public function sendGift($playerid, $playername, $friendid, $friendname )
@@ -77,7 +77,7 @@
 
 	        if (!is_object($stmt)) {
 	   			logger::error("newMsg error:".$playerid."|".$friendid." ".$db->get_getConn()->error, __CLASS__);
-	   			return -2;
+				return response::format(ERROR_MYSQL, "db sql error");
 			}
 
 	        $stmt->bind_param($GLOBALS['sqlmould']["unfriend"], $playerid, $friendid);
@@ -91,7 +91,7 @@
 
 	        logger::write("unfriend success: ".$playerid."|".$friendid, __CLASS__);
 
-	        return 0;
+			return response::format(ERROR_OK);
 
 		}
 	
