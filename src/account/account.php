@@ -10,17 +10,27 @@
 	{
 		public function newAccount($account, $pwd, $type)
 		{
+			if (!isset($account) || !isset($pwd) || !isset($type)) {
+				$error = "param error:$account $type $pwd";
+				logger::error($error, __CLASS__);
+				return responce::format(ERROR_PARAMS, $error);
+			}
+
 			$db = new db_mysql("shin_chan");
 
 			if (dayu === $type && empty($pwd)) {
-				return response::format(ERROR_PARAMS, "$account $type: empty pwd");
+				$error = "$account $type: empty pwd";
+				logger::error($error, __CLASS__);
+				//return responce::format(ERROR_PARAMS, $error);
 			}
 
 			$arr = array($account, md5($pwd), $type, time());
   			$result =  $db->db_proc("proc_new_account", $arr);
 
   			if (!is_object($result)) {
-  				return responce::format(ERROR_MYSQL, "$account $pwd $type $result is null");
+  				$error = "$account $pwd $type $result is null";
+  				logger::error($error, __CLASS__);
+  				return responce::format(ERROR_MYSQL, $error);
   			}
   			$row = $result->fetch_assoc();
   			if ( $row["result"] < 0 ) {
@@ -31,8 +41,8 @@
   			}
 
   			$result->free();
+
   			logger::write("newAccount success: ".$account." ".$pwd."|".md5($pwd)." ".$type, "account");
-  			
 			return responce::format(ERROR_OK, __CLASS__.":OK");
 		}
 
@@ -79,12 +89,16 @@
 				//var_dump($rows);
 				//echo "<br>";
 				if ($rows["result"] == 1 && intval($rows["rguid"]) > 0) {
-					logger::write("newChar success: ".$account." ".$type." ".$charname." ".$rows["rguid"], "account");
-					return responce::format(ERROR_OK, $rows["rguid"]);
+					logger::write("newChar success: ".$account." ".$type." ".$charname." ".json_encode($rows), "account");
+					return responce::format(ERROR_OK, json_encode($rows));
+				}else if ($rows["result"] == -2)
+				{
+					logger::write("newChar error charname exists:".$account." ".$type." ".$charname." ".json_encode($rows), "account");
+					return responce::format(ERROR_OK, json_encode($rows));
 				}
 			}
 
-			logger::write("newChar error: ".$account." ".$type." ".$charname." ".$rows["guid"], "account");
+			logger::write("newChar error: ".$account." ".$type." ".$charname." ".json_encode($rows), "account");
 			return responce::format(ERROR_MYSQL, "account got char");
 		}
 
@@ -139,6 +153,11 @@
 			}
 			return NULL;
 
+		}
+		public function guestLogin($account, $pwd, $type, $charname)
+		{
+			self::newAccount($account, $pwd, $type);
+			return self::newChar($account, $type, $charname);
 		}
 	}
 

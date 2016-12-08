@@ -8,7 +8,7 @@
 		{
 			if ( !account::bExistsChar($sourceid) || !account::bExistsChar($receiverid) ) 
 			{
-				return response::format(ERROR_PARAM, "id error $sourceid $receiverid");
+				return response::format(ERROR_PARAMS, "id error $sourceid $receiverid");
 			}
 
 			$db = new db_mysql();
@@ -56,7 +56,7 @@
 		{
 			if ( !account::bExistsChar($playerid) ) 
 			{
-				return response::format(ERROR_PARAM, "no $playerid");
+				return response::format(ERROR_PARAMS, "no $playerid");
 			}
 
 			$mail = self::loadMail($mailid);
@@ -85,7 +85,7 @@
 		{
 			if ( !account::bExistsChar($guid) ) 
 			{
-				return response::format(ERROR_PARAM, "no $guid");
+				return response::format(ERROR_PARAMS, "no $guid");
 			}
 			//filter the deadline msg and set isvalid to false
 			$db = new db_mysql();

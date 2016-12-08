@@ -7,6 +7,7 @@
 			2004	=> "login",
 			//2005	=> "bExistsChar",
 			//2006	=> "sGetCharname",
+			2007	=> "guestLogin",
 		),
 
 		"message"	=> array(

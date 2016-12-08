@@ -8,6 +8,7 @@ $LOGGER_TYPE = array
 	"message"	=> LOGGERPATH."message_".date("Y-m-d").".log",
 	"friend"	=> LOGGERPATH."friend_".date("Y-m-d").".log",
 	"mail"		=> LOGGERPATH."mail_".date("Y-m-d").".log",
+	"interface"		=> LOGGERPATH."interface_".date("Y-m-d").".log",
 );
 
 $LOGGER_SWITCH = TRUE;

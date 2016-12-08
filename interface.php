@@ -1,18 +1,32 @@
 <?php
 
 	include dirname(__FILE__).'/interface_define.php';
+	include dirname(__FILE__).'/src/log/logger.php';
 	include dirname(__FILE__).'/src/utils/handler_define.php';
 
 	$params = $_GET;
 	$data	= $_POST;
+	//$dddd 	= $_REQUEST;
+	//var_dump($dddd);
 
-	//echo json_encode($params);
-	//$json_data =  json_encode($data);
-	if (!isset($params['handler']) || !isset($params['findex'])) {
-		echo "request error".json_encode($params)."\n";
+  	//logger::write("dd:".json_encode($dddd), "account");
+
+	if (!isset($params['handler']) || !isset($params['findex']) || !isset($data['json_data'])) {
+		logger::write("request error".json_encode($params)." ".json_encode($data)."\n", "interface");
+		echo "interface request error";
 		return;
 	}
 
+	$json_data = $data['json_data'];
+//	echo "json:".$json_data."\n";
+//	echo "encode:".urldecode($json_data)."\n";
+
+	$packet = json_decode(urldecode($json_data), true);
+	logger::write("receive packet:".$json_data, "interface");
+	if (is_null($packet)) {
+		logger::error("packet parse error", "interface");
+		return;
+	}
 	$handler = NULL;
 
 	if ($params["handler"] === "account" ) {
@@ -40,6 +54,6 @@
 
 	$function = $GLOBALS["handlers"][$params["handler"]][$params["findex"]];
 
-	$result = $handler->process($function, $data);
+	$result = $handler->process($function, $packet);
 	echo $result."\n";
 ?>

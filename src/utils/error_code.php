@@ -1,6 +1,6 @@
 <?php
 	define("ERROR_OK",		0);
-	define("ERROR_PARAM",	-1);
+	define("ERROR_PARAMS",	-1);
 	define("ERROR_MYSQL",	-2);
 	define("ERROR_TRUE",	 TRUE);
 	define("ERROR_FALSE",	 FALSE);
