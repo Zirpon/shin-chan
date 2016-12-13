@@ -18,7 +18,7 @@
 		//	2013	=> "getMsg",
 		//	2014	=> "readMsg",
 			2015	=> "handleMsg",
-			2016	=> "getTimestamp";
+			2016	=> "getTimestamp",
 		),
 
 		"friend"	=> array(

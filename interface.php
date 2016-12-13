@@ -3,6 +3,7 @@
 	include dirname(__FILE__).'/interface_define.php';
 	include dirname(__FILE__).'/src/log/logger.php';
 	include dirname(__FILE__).'/src/utils/handler_define.php';
+	include dirname(__FILE__).'/src/utils/error_code.php';
 
 	$params = $_GET;
 	$data	= $_POST;
@@ -11,23 +12,26 @@
 
   	logger::write("request:".json_encode($params)."|"."data:".json_encode($data)."|", "interface");
 
-	if (!isset($params['handler']) || !isset($params['findex']) || !isset($data['json_data'])) {
+	if (!isset($params['handler']) || !isset($params['findex'])) 
+	{
 		logger::error("request error".json_encode($params)." ".json_encode($data)."\n", "interface");
-		echo "interface request error";
-		return;
+		return response::format(ERROR_PARAMS, "interface request error");
 	}
 
-	$json_data = $data['json_data'];
-//	echo "json:".$json_data."\n";
-//	echo "encode:".urldecode($json_data)."\n";
-	//$json_data = addslashes($json_data);
-	//$json_data = ltrim($json_data, "\"");
-	//$json_data = rtrim($json_data, "\"");
+	$packet = array();
+	if (isset($data['json_data'])) {
+		$json_data = $data['json_data'];
+	//	echo "json:".$json_data."\n";
+	//	echo "encode:".urldecode($json_data)."\n";
+		//$json_data = addslashes($json_data);
+		//$json_data = ltrim($json_data, "\"");
+		//$json_data = rtrim($json_data, "\"");
 
-	$packet = json_decode(urldecode($json_data), true);
-	if (is_null($packet)) {
-		logger::error("packet parse error", "interface");
-		return;
+		$packet = json_decode(urldecode($json_data), true);
+		if (is_null($packet)) {
+			logger::error("packet parse error", "interface");
+			return response::format(ERROR_PARAMS, "packet parse error");
+		}
 	}
 
 	$handler = NULL;
@@ -51,7 +55,7 @@
 	else
 	{
 		echo "request error".json_encode($params)."\n";
-		return;
+		return response::format(ERROR_PARAMS, "handler error");
 	}
 
 

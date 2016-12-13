@@ -46,7 +46,7 @@
 	        $b = $stmt->execute();
 	        $stmt->close();
 
-	        logger::write("createfriend success: "$playerid."|".$friendid, __CLASS__);
+	        logger::write("createfriend success: ".$playerid."|".$friendid, __CLASS__);
 
 			return response::format(ERROR_OK);
 		}

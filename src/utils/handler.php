@@ -4,9 +4,9 @@
 
 class handler
 {
-	public function process($funcion, $packet)
+	public function process($function, $packet)
 	{
-		return call_user_func_array(array($this, $funcion), $packet);
+		return call_user_func_array(array($this, $function), $packet);
 	}
 }
 
