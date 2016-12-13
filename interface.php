@@ -9,10 +9,10 @@
 	//$dddd 	= $_REQUEST;
 	//var_dump($dddd);
 
-  	//logger::write("dd:".json_encode($dddd), "account");
+  	logger::write("request:".json_encode($params)."|"."data:".json_encode($data)."|", "interface");
 
 	if (!isset($params['handler']) || !isset($params['findex']) || !isset($data['json_data'])) {
-		logger::write("request error".json_encode($params)." ".json_encode($data)."\n", "interface");
+		logger::error("request error".json_encode($params)." ".json_encode($data)."\n", "interface");
 		echo "interface request error";
 		return;
 	}
@@ -20,13 +20,16 @@
 	$json_data = $data['json_data'];
 //	echo "json:".$json_data."\n";
 //	echo "encode:".urldecode($json_data)."\n";
+	//$json_data = addslashes($json_data);
+	//$json_data = ltrim($json_data, "\"");
+	//$json_data = rtrim($json_data, "\"");
 
 	$packet = json_decode(urldecode($json_data), true);
-	logger::write("receive packet:".$json_data, "interface");
 	if (is_null($packet)) {
 		logger::error("packet parse error", "interface");
 		return;
 	}
+
 	$handler = NULL;
 
 	if ($params["handler"] === "account" ) {

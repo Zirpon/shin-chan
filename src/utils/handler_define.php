@@ -8,6 +8,8 @@
 			//2005	=> "bExistsChar",
 			//2006	=> "sGetCharname",
 			2007	=> "guestLogin",
+			2008	=> "archive",
+			2009	=> "loadArchive",
 		),
 
 		"message"	=> array(
@@ -16,6 +18,7 @@
 		//	2013	=> "getMsg",
 		//	2014	=> "readMsg",
 			2015	=> "handleMsg",
+			2016	=> "getTimestamp";
 		),
 
 		"friend"	=> array(

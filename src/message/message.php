@@ -155,5 +155,10 @@
 			
 			return response::format(ERROR_OK);
 		}
+
+		public function getTimestamp( )
+		{
+			return response::format(ERROR_OK, time());
+		}
 	}
 ?>

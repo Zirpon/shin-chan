@@ -9,6 +9,7 @@ $LOGGER_TYPE = array
 	"friend"	=> LOGGERPATH."friend_".date("Y-m-d").".log",
 	"mail"		=> LOGGERPATH."mail_".date("Y-m-d").".log",
 	"interface"		=> LOGGERPATH."interface_".date("Y-m-d").".log",
+	"elapsedTime"	=> LOGGERPATH."elapsedTime_".date("Y-m-d").".log",
 );
 
 $LOGGER_SWITCH = TRUE;

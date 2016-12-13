@@ -9,7 +9,7 @@
 		{
 			if ( !account::bExistsChar($playerid) || !account::bExistsChar($friendid) ) 
 			{
-				return response::format(ERROR_PARAM, "id error $playerid $friendid");
+				return response::format(ERROR_PARAMS, "id error $playerid $friendid");
 			}
 			$db = new db_mysql();
 			$sql = createfriend;

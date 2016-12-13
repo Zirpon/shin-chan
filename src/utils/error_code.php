@@ -6,7 +6,7 @@
 	define("ERROR_FALSE",	 FALSE);
 	define("ERROR_EMPTY",	0);
 
-	class responce
+	class response
 	{
 
 		public function format($type, $result = "")

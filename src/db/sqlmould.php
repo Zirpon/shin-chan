@@ -1,6 +1,9 @@
 <?php
-	define("nExistsCharByGuid",	"select count(*) from t_char where guid = ");
+	define("nExistsCharByGuid",		"select count(*) from t_char where guid = ");
 	define("sGetCharnameByGuid",	"select name from t_char where guid = ");
+	define("archive",				"update t_char set mdata = ? where guid = ?");
+	define("loadArchive",			"select mdata from t_char where guid = ");
+
 	define("newMesssage",	"insert into t_msgqueue ( senderid, receiverid, type, status, isvalid, content, deadline ) 
 							values ( ?, ?, ?, 0, 1, ?, ?);");
 	define("readMsg",	"update t_msgqueue set isvalid = 0 where id = ?;");
@@ -15,7 +18,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////	
 	$sqlmould = array(
-		//"nExistsCharByGuid" => "i",
+		"archive" 		=> "si",
 		"newMesssage"	=> "iiisi",
 		"readMsg" 		=> "i",
 		"createfriend" 	=> "ii",
