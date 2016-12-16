@@ -2,7 +2,7 @@
 	require_once dirname(__FILE__).'/../db/db_mysql.php';
 	require_once dirname(__FILE__).'/../log/logger.php';
 	require_once dirname(__FILE__).'/../utils/handler.php';
-	require_once dirname(__FILE__).'/../utils/elapsed_time.php';
+	require_once dirname(__FILE__).'/../utils/elapsedTime.php';
 
 	define("dayu", 1);
 	define("guest", 2);
