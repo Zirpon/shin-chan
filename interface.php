@@ -10,11 +10,11 @@
 	//$dddd 	= $_REQUEST;
 	//var_dump($dddd);
 
-  	logger::write("request:".json_encode($params)."|"."data:".json_encode($data)."|", "interface");
+  	logger::write("request:".json_encode($params)."\n"."data:".print_r($data, true), "interface");
 
 	if (!isset($params['handler']) || !isset($params['findex'])) 
 	{
-		logger::error("request error".json_encode($params)." ".json_encode($data)."\n", "interface");
+		logger::error("request error".json_encode($params)."\n".print_r($data, true), "interface");
 		return response::format(ERROR_PARAMS, "interface request error");
 	}
 
@@ -34,27 +34,34 @@
 		}
 	}
 
+  	logger::write("request packet:".print_r($packet, true), "interface");
+
+
 	$handler = NULL;
 
 	if ($params["handler"] === "account" ) {
 		include  account;
-		$handler = new account();		
+		$handler = new account();
 	}
 	else if ($params["handler"] === "message" ) {
 		include  message;
-		$handler = new message();		
+		$handler = new message();
 	}
 	else if ($params["handler"] === "friend" ) {
 		include  friend;
-		$handler = new friend();		
+		$handler = new friend();
 	}
 	else if ($params["handler"] === "mail" ) {
 		include  mail;
-		$handler = new mail();		
+		$handler = new mail();
+	}
+	else if ($params["handler"] === "chapter" ) {
+		include  chapter;
+		$handler = new chapter();
 	}
 	else
 	{
-		echo "request error".json_encode($params)."\n";
+		logger::error("request handler error".json_encode($params), "interface");
 		return response::format(ERROR_PARAMS, "handler error");
 	}
 

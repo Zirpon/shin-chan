@@ -102,7 +102,7 @@ $GLOBALS['DB_SOCKET']  = "/data/lib/mysql/mysql.sock";
         $sql_str_head = "call $proc_name(";
 
         //var_dump($params);
-        if (is_array($params)) 
+        if (is_array($params) && !empty($params)) 
         {
             for($i=0; $i < sizeof($params); $i++)
             {
@@ -126,8 +126,9 @@ $GLOBALS['DB_SOCKET']  = "/data/lib/mysql/mysql.sock";
                 $sql_str_head = $sql_str_head.$var_str;
             }
 
-            $sql_str_head = $sql_str_head.");";
         }
+
+        $sql_str_head = $sql_str_head.");";
 
         //echo  $sql_str_head;
         //echo "<br>";

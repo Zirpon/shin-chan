@@ -27,6 +27,8 @@
 			2023	=> "unfriend",//$playerid, $friendid
 			2024	=> "requestGift",
 			2025	=> "sendMsg",
+			2026	=> "recommendFriends",
+			2027	=> "searchFriendById",//friendId
 		),
 
 		"mail"		=> array(
@@ -34,6 +36,11 @@
 			//2032	=> "loadMail",//$mailid
 			2033	=> "readMail",//$playerid, $mailid
 			2034	=> "loadMailList",//$guid
+		),
+
+		"chapter"	=> array(
+			2041	=> "loadChapters",//guid
+			2042	=> "updateChapter",//$guid, $chapter, $star, $point, $firstFinishtime
 		),
 	);
 ?>

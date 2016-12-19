@@ -36,7 +36,7 @@ CREATE TABLE `t_account` (
   PRIMARY KEY (`gid`),
   KEY `Index_accname` (`accname`),
   KEY `Index_accnameandtype` (`accname`,`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +95,7 @@ CREATE TABLE `t_char` (
   UNIQUE KEY `Index_guid` (`guid`),
   UNIQUE KEY `Index_name` (`name`) USING HASH,
   KEY `Index_accname` (`accname`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +116,7 @@ CREATE TABLE `t_friend` (
   `isvalid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `playerid` (`playerid`,`friendid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -397,6 +397,38 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `proc_check_charname_copy` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_check_charname_copy`(pcharname varchar(50) binary)
+BEGIN
+	declare result int default -1;
+	declare cnt int default 0;
+	start transaction;
+	select count(*) into cnt from t_char where charname = pcharname;
+
+	if cnt > 0 then
+		set result = -2;
+	else
+		insert into t_charnamelist (charname) values (pcharname);
+		set result = 0;
+	end if;
+
+	commit;
+	SELECT result;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_get_charlist` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -415,6 +447,54 @@ BEGIN
 	select guid from t_account where accname = paccname and type = ptype;
 
 	#commit;
+	#SELECT result;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `proc_get_recommendFriends` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_recommendFriends`()
+BEGIN
+	declare result int default -1;
+	
+	#搜索3个人
+	declare cnt int default 3;
+	
+	#一个月内登录过
+	declare timeinterval int default 2592000;
+	set timeinterval = UNIX_TIMESTAMP() - timeinterval;
+
+	start transaction;
+
+	#drop table if exists tmp_recomFriends;
+	set @maxgid = (select MAX(gid) from t_char);
+	#select "max gid is " + @maxgid;
+	REPEAT
+		set @num = RAND(cnt);
+		select gid,guid,name,logintime,mflag from t_char where gid = FLOOR(@num*@maxgid) ;#and logintime > timeinterval and mflag != "";
+		set cnt = cnt - 1;
+	UNTIL cnt <= 0 END REPEAT;
+
+	/*
+	create TEMPORARY table tmp_recomFriends (
+		select gid,guid,name,logintime,mflag from t_char where logintime > timeinterval and mflag != "" limit cnt
+	);
+	*/
+
+	
+
+	commit;
 	#SELECT result;
 END ;;
 DELIMITER ;
@@ -555,4 +635,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-02 15:51:24
+-- Dump completed on 2016-12-19 19:42:04

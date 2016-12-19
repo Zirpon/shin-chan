@@ -3,5 +3,6 @@
 	define("message", dirname(__FILE__).'/src/message/message.php');
 	define("friend", dirname(__FILE__).'/src/friend/friend.php');
 	define("mail", dirname(__FILE__).'/src/mail/mail.php');
+	define("chapter", dirname(__FILE__).'/src/player/chapter.php');
 
 ?>

@@ -94,7 +94,76 @@
 			return response::format(ERROR_OK);
 
 		}
+
+		public function recommendFriends()
+		{
+			include dirname(__FILE__).'/../player/chapter.php';
+
+			$db = new db_mysql();
+
+
+			$param = array();
+			$result = $db->db_proc("proc_get_recommendFriends", $param);
+
+			//var_dump($result);
+			$ret = array();
+
+			//var_dump($result);
+			while ($rows = $result->fetch_assoc()) {
+
+				//var_dump($rows);
+				$friend = array();
+				$friend['guid'] 		= $rows['guid'];
+				$friend['name'] 		= $rows['name'];
+				$friend['logintime'] 	= $rows['logintime'];
+				$friend['maxChapter']	= chapter::getMaxChapterLevel($friend['guid']);
+				$friend['totalStar'] 	= chapter::getTotalStar($friend['guid']);
+
+				$ret[] = $friend;
+				//var_dump($friend);
+				$result->close();
+				if ( true == $db->db_getConn()->more_results() )
+				{
+					$db->db_cleanQuery();
+					$result = $db->db_getConn()->store_result();
+					//echo "ddddd ".is_object($result);
+				}
+				if (!is_object($result)) {
+					break;
+				}
+
+			}
+
+			logger::write("recommendFriends success: ".print_r($ret, true), __CLASS__);
+			return response::format(ERROR_OK, json_encode($ret));
+		}
 	
+		public function searchFriendById($friendId)
+		{
+			include dirname(__FILE__).'/../player/chapter.php';
+
+			$db = new db_mysql();
+
+			$result = $db->db_query_select(searchFriendById.$friendId);
+
+			if (isset($result) && $result->num_rows > 0) {
+				$rows = $result->fetch_assoc();
+
+				$friend = array();
+				$friend['guid'] 		= $rows['guid'];
+				$friend['name'] 		= $rows['name'];
+				$friend['logintime'] 	= $rows['logintime'];
+				$friend['maxChapter']	= chapter::getMaxChapterLevel($friend['guid']);
+				$friend['totalStar'] 	= chapter::getTotalStar($friend['guid']);
+				//var_dump($rows);
+
+				logger::write("searchFriendById success: ".print_r($friend, true), __CLASS__);
+				return response::format(ERROR_OK, json_encode($friend));
+			}
+
+			return response::format(ERROR_PARAMS, "id error $friendid");
+		}
+
 		public function requestGift(){}
 
 		public function sendMsg(){}
