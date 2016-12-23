@@ -1,22 +1,20 @@
 <?php
-	require_once dirname(__FILE__).'/../db/db_mysql.php';
-	require_once dirname(__FILE__).'/../log/logger.php';
+
 	require_once dirname(__FILE__).'/../utils/handler.php';
-	require_once dirname(__FILE__).'/../utils/elapsedTime.php';
 /**
 * player class
 */
 class chapter extends handler
 {
 	
-	function __construct()
+	public function __construct()
 	{
 		
 	}
 
 	protected $m_arrChapters;
 
-	function loadChapters( $guid )
+	public function loadChapters( $guid )
 	{
 		$db = new db_mysql();
 		$result = $db->db_query_select(loadChapters.$guid);
@@ -31,7 +29,7 @@ class chapter extends handler
 		return FALSE;
 	}
 
-	function saveChapters( $guid )
+	public function saveChapters( $guid )
 	{
 		$db = new db_mysql();
 		$conn = $db->db_getConn();
@@ -53,28 +51,28 @@ class chapter extends handler
 		return response::format(ERROR_OK, "send msg ok");
 	}
 
-	function formatChapters()
+	public function formatChapters()
 	{
 		return implode("|", $this->m_arrChapters);
 	}
 
-	function getChapters( $str )
+	public function getChapters( $str )
 	{
 		$this->m_arrChapters = explode("|", $str);
 	}
 
-	function formatChapter($star, $point, $firstFinishtime)
+	public function formatChapter($star, $point, $firstFinishtime)
 	{
 		return $star."-".$point."-".$firstFinishtime;
 	}
 
-	function getChapterResult( $str )
+	public function getChapterResult( $str )
 	{
 		$result = explode("-", $str);
 		return $result;
 	}
 
-	function updateChapter($guid, $chapter, $star, $point, $firstFinishtime)
+	public function updateChapter($guid, $chapter, $star, $point, $firstFinishtime)
 	{
 		if ($chapter <= 0) {
 			return response::format(ERROR_PARAMS, "chapter error:$chapter");
@@ -103,7 +101,7 @@ class chapter extends handler
 		return response::format(ERROR_OK, "chapter update ok");
 	}
 
-	function getMaxChapterLevel($guid)
+	public function getMaxChapterLevel($guid)
 	{
 		self::loadChapters($guid);
 		//var_dump($this->m_arrChapters);
@@ -115,7 +113,7 @@ class chapter extends handler
 		return count($this->m_arrChapters);
 	}
 
-	function getTotalStar($guid)
+	public function getTotalStar($guid)
 	{
 		self::loadChapters($guid);
 

@@ -27,6 +27,9 @@
 	define("loadChapters", "select mflag from t_char where guid = ");
 	define("saveChapters", "update t_char set mflag = ? where guid = ?");
 
+	//seaVentureMgr
+	define("loadSeaVentureRank", "select * from t_seaventure_rank;");
+
 
 //////////////////////////////////////////////////////////////////////////////////////	
 	$sqlmould = array(

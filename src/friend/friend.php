@@ -95,14 +95,13 @@
 
 		}
 
-		public function recommendFriends()
+		public function recommendFriends( $guid )
 		{
 			include dirname(__FILE__).'/../player/chapter.php';
 
 			$db = new db_mysql();
 
-
-			$param = array();
+			$param = array($guid);
 			$result = $db->db_proc("proc_get_recommendFriends", $param);
 
 			//var_dump($result);
