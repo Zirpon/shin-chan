@@ -115,7 +115,7 @@
 				$friend['guid'] 		= $rows['guid'];
 				$friend['name'] 		= $rows['name'];
 				$friend['logintime'] 	= $rows['logintime'];
-				$friend['maxChapter']	= chapter::getMaxChapterLevel($friend['guid']);
+				$friend['maxChapter']	= chapter::getMaxChapterLevel($friend['guid']);//no new use member var any harm
 				$friend['totalStar'] 	= chapter::getTotalStar($friend['guid']);
 
 				$ret[] = $friend;

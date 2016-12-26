@@ -6,6 +6,9 @@
 	define("ERROR_FALSE",	 FALSE);
 	define("ERROR_EMPTY",	0);
 
+	define("ERROR_SEAVENTURENOTONSHOW", -1);
+	define("ERROR_SEAVENTURECLOSE", -1);
+
 	class response
 	{
 

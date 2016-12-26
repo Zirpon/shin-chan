@@ -59,6 +59,14 @@
 		include  chapter;
 		$handler = new chapter();
 	}
+	else if ($params["handler"] === "seaVentureMgr" ) {
+		include  seaVentureMgr;
+		$handler = new seaVentureMgr();
+	}
+	else if ($params["handler"] === "seaVenture" ) {
+		include  seaVenture;
+		$handler = new seaVenture();
+	}
 	else
 	{
 		logger::error("request handler error".json_encode($params), "interface");

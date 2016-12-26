@@ -28,7 +28,9 @@
 	define("saveChapters", "update t_char set mflag = ? where guid = ?");
 
 	//seaVentureMgr
-	define("loadSeaVentureRank", "select * from t_seaventure_rank;");
+	define("loadSeaVentureRank", "select * from t_seaventure_rank order by score desc");
+	define("saveSeaVentureRank", "insert into t_seaventure_rank (rank,guid,name,sex,score) VALUES ");
+	define("cleanSeaVentureRank", "truncate t_seaventure_rank;");
 
 
 //////////////////////////////////////////////////////////////////////////////////////	

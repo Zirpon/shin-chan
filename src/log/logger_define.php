@@ -10,7 +10,8 @@ $LOGGER_TYPE = array
 	"mail"		=> LOGGERPATH."mail_".date("Y-m-d").".log",
 	"interface"		=> LOGGERPATH."interface_".date("Y-m-d").".log",
 	"elapsedTime"	=> LOGGERPATH."elapsedTime_".date("Y-m-d").".log",
-	"chapter"	=> LOGGERPATH."chapter_".date("Y-m-d").".log",
+	"chapter"		=> LOGGERPATH."chapter_".date("Y-m-d").".log",
+	"seaVentureMgr"	=> LOGGERPATH."seaVentureMgr_".date("Y-m-d").".log",
 );
 
 $LOGGER_SWITCH = TRUE;

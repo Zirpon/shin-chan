@@ -9,7 +9,7 @@ class chapter extends handler
 	
 	public function __construct()
 	{
-		
+
 	}
 
 	protected $m_arrChapters;

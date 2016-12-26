@@ -43,9 +43,17 @@
 			2042	=> "updateChapter",//$guid, $chapter, $star, $point, $firstFinishtime
 		),
 
-		"seaVenture"=> array(
-			2051	=> "loadChapters",//guid
-			2052	=> "updateChapter",//$guid, $chapter, $star, $point, $firstFinishtime
+		"seaVentureMgr"=> array(
+			2051	=> "loadRanklist",//
+			2052	=> "showRanklist",//
+			2053	=> "getRanklist",//
+			2054	=> "ranklistSort",//
+			//2055	=> "saveRanklist",//
+			2056	=> "recordRanklist",//test
+		),
+
+		"seaVenture" => array(
+			2061	=> "doVenture", //$guid, $score
 		),
 	);
 ?>
