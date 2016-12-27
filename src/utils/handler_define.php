@@ -29,6 +29,7 @@
 			2025	=> "sendMsg",
 			2026	=> "recommendFriends", // playerid
 			2027	=> "searchFriendById",//friendId
+			2028	=> "getFriendlist",//guid
 		),
 
 		"mail"		=> array(
@@ -54,6 +55,7 @@
 
 		"seaVenture" => array(
 			2061	=> "doVenture", //$guid, $score
+			2062	=> "getfriendRanklist",//guid
 		),
 	);
 ?>

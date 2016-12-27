@@ -163,6 +163,25 @@
 			return response::format(ERROR_PARAMS, "id error $friendid");
 		}
 
+		public function getFriendlist( $guid )
+		{
+			$db = new db_mysql();
+			$result = $db->db_query_select("select friendid from t_friend where playerid = $guid;");
+			if (is_null($result)) {
+				return false;
+			}
+
+			$friendlist = array();
+
+			while ( $rows = $result->fetch_assoc() ) {
+				//var_dump($rows);
+				$friendid = $rows['friendid'];
+				$friendlist[] = $friendid;
+			}
+
+			return response::format(ERROR_OK, json_encode($friendlist));
+		}
+
 		public function requestGift(){}
 
 		public function sendMsg(){}

@@ -65,15 +65,6 @@ class seaVentureMgr extends handler
 		//echo self::showRanklist();
 	}
 
-	public function updateRankIndex()
-	{
-
-		for ($i=0; $i < count(self::$m_arrRanklist); $i++) { 
-			self::$m_arrRanklist[$i]["rank"] = $i + 1;
-		}
- 		//echo self::showRanklist();
-	}
-
 	public function insertRanklist( $guid, $name, $sex, $score)
 	{
 		if (false == self::isOpened()) {
@@ -107,7 +98,7 @@ class seaVentureMgr extends handler
 		}
 
 		self::ranklistSort();
-		self::updateRankIndex();
+		self::$m_arrRanklist = updateRankIndex(self::$m_arrRanklist);
 
 		return response::format(ERROR_OK, "SEA VENTURE CLOSE");
 	}

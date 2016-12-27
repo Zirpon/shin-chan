@@ -38,6 +38,17 @@
         return $arrays;   
     }
 
+    function updateRankIndex($ranklist)
+    {
+
+        for ($i=0; $i < count($ranklist); $i++) { 
+            $ranklist[$i]["rank"] = $i + 1;
+        }
+
+        return $ranklist;
+    }
+
+
     function getThisWeekdayTimestamp($weekday, $hour = 0, $min = 0, $sec = 0)
     {
     	if ($weekday < 0 || $weekday > 7) {
