@@ -8,6 +8,7 @@
 
 	define("ERROR_SEAVENTURENOTONSHOW", -1);
 	define("ERROR_SEAVENTURECLOSE", -1);
+	define("ERROR_ISREQUESTFRIENDGIFT", -1);
 
 	class response
 	{

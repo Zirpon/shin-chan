@@ -115,9 +115,10 @@ CREATE TABLE `t_friend` (
   `msgcount` int(11) NOT NULL COMMENT '消息计数器',
   `giftcount` int(11) NOT NULL COMMENT 'gift计数器',
   `isvalid` int(11) NOT NULL,
+  `requestGift` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `playerid` (`playerid`,`friendid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -714,4 +715,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-26 22:31:02
+-- Dump completed on 2016-12-27 18:29:24

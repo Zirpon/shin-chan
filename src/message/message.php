@@ -15,6 +15,13 @@
 				return response::format(ERROR_PARAMS, "$senderid $receiverid $type error");
 			}
 
+	        if ($type == eMsgType_requestGift) {
+	        	$isRequestFriend = friend::isRequestFriend($senderid, $receiverid);
+	        	if ($isRequestFriend == 1) {
+	        		return response::format(ERROR_ISREQUESTFRIENDGIFT, "already request friend gift, wait your friend response");
+	        	}
+	        }
+
 			//send msg counter ++
 			$db = new db_mysql();
 			$conn = $db->db_getConn();
@@ -29,6 +36,10 @@
 	        $stmt->bind_param($GLOBALS['sqlmould']["newMesssage"], $senderid, $receiverid, $type, $content, $deadline);
 	        $stmt->execute();
 	        $stmt->close();
+
+	        if ($type == eMsgType_requestGift) {
+	        	friend::requestFriend($senderid, $receiverid);
+	        }
 
 	        logger::write("newMsg success:".$senderid."|".$receiverid."|".$type."|".$content."|".$deadline, __CLASS__);
 

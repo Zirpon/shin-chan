@@ -2,6 +2,8 @@
 	require_once dirname(__FILE__).'/../account/account.php';
 	require_once dirname(__FILE__).'/../message/message_define.php';
 	require_once dirname(__FILE__).'/../mail/mail.php';
+	require_once dirname(__FILE__).'/../player/chapter.php';
+
 	
 	class friend extends handler
 	{
@@ -51,6 +53,64 @@
 			return response::format(ERROR_OK);
 		}
 
+		public function isFriend($playerid, $friendid)
+		{
+			if ( !account::bExistsChar($playerid) || !account::bExistsChar($friendid) ) 
+			{
+				return -1;
+			}
+
+			$db = new db_mysql();
+			$result = $db->db_query_select("select count(*) from t_friend where playerid = $playerid 
+											and friendid = $friendid and isvalid = 1;");
+			//var_dump($result);
+			$row = $result->fetch_assoc();
+			$isFriend = $row['count(*)'];
+			
+			return $isFriend;
+		}
+
+		public function requestGift($playerid, $friendid)
+		{
+
+			$bIsfriend = self::isFriend($playerid, $friendid);
+			if ($bIsfriend == false) {
+				return false;
+			}
+
+			$db = new db_mysql();
+			$result = $db->db_query_select("update t_friend set requestGift = 1 where 
+											playerid = $playerid and friendid = $friendid");
+			var_dump($result);
+			if (is_null($result)) {
+				return false;
+			}
+
+			return $result;
+		}
+
+		public function isRequestGift($playerid, $friendid)
+		{
+			$bIsfriend = self::isFriend($playerid, $friendid);
+			if ($bIsfriend == false) {
+				return false;
+			}
+
+			$db = new db_mysql();
+			$result = $db->db_query_select("select requestGift from t_friend where playerid = $playerid 
+											and friendid = $friendid;");
+			//var_dump($result);
+			if ($result->num_rows <= 0) {
+				return -1;
+			}
+
+			$row = $result->fetch_assoc();
+			//var_dump($row);
+			$isRequestGift = $row['requestGift'];
+
+			return $isRequestGift;
+		}
+
 		public function sendGift($playerid, $playername, $friendid, $friendname )
 		{
 			if ( !account::bExistsChar($playerid) || !account::bExistsChar($friendid) ) 
@@ -58,12 +118,22 @@
 				return -1;
 			}
 
-			return mail::sendMail(2, $playerid, $playername, $friendid, $friendname);
-			//send gift time need to be restrict
-			//bind_param param should be variable, can not be const value
-	     
-	        //send gift counter ++
-		}
+			$res =  mail::sendMail(2, $playerid, $playername, $friendid, $friendname);
+			if ($result == 0) {
+				$db = new db_mysql();
+				$result = $db->db_query_select("update t_friend set requestGift = 0 where playerid = $friendid 
+												and friendid = $playerid and isvalid = 1");
+			}
+
+			return $res;
+	    }
+
+	    public function cleanRequestGiftStatus()
+	    {
+	    	$db = new db_mysql();
+	    	$result = $db->db_query_select("update t_friend set requestGift = 0");
+	    	return $result;
+	    }
 
 		public function unfriend($playerid, $friendid)
 		{
@@ -137,29 +207,16 @@
 			return response::format(ERROR_OK, json_encode($ret));
 		}
 	
-		public function searchFriendById($friendId)
+		public function searchFriendById($friendid)
 		{
-			include dirname(__FILE__).'/../player/chapter.php';
-
 			$db = new db_mysql();
 
-			$result = $db->db_query_select(searchFriendById.$friendId);
-
-			if (isset($result) && $result->num_rows > 0) {
-				$rows = $result->fetch_assoc();
-
-				$friend = array();
-				$friend['guid'] 		= $rows['guid'];
-				$friend['name'] 		= $rows['name'];
-				$friend['logintime'] 	= $rows['logintime'];
-				$friend['maxChapter']	= chapter::getMaxChapterLevel($friend['guid']);
-				$friend['totalStar'] 	= chapter::getTotalStar($friend['guid']);
-				//var_dump($rows);
-
-				logger::write("searchFriendById success: ".print_r($friend, true), __CLASS__);
-				return response::format(ERROR_OK, json_encode($friend));
+			$friendinfo = self::friendinfo($friendid);
+			if ($friendinfo != -1) {
+				logger::write("searchFriendById success: ".print_r($friendinfo, true), __CLASS__);
+				return response::format(ERROR_OK, json_encode($friendinfo));	
 			}
-
+			
 			return response::format(ERROR_PARAMS, "id error $friendid");
 		}
 
@@ -172,17 +229,41 @@
 			}
 
 			$friendlist = array();
+			
+			$db_queryRecord = new db_mysql();
 
 			while ( $rows = $result->fetch_assoc() ) {
 				//var_dump($rows);
+				$friendRecord =array();
+
 				$friendid = $rows['friendid'];
-				$friendlist[] = $friendid;
+
+				$friendRecord = self::friendinfo($friendid);
+				
+				$friendlist[] = $friendRecord;
 			}
 
-			return response::format(ERROR_OK, json_encode($friendlist));
+			return response::format(ERROR_OK, json_encode($friendlistpfr));
 		}
 
-		public function requestGift(){}
+		public function friendinfo($friendid)
+		{
+			$db = new db_mysql();
+
+			$friendinfo = array();
+			$result = $db->db_query_select("select name,logintime from t_char where guid = $friendid;");
+			//var_dump($result);
+			if ($result->num_rows <= 0) {
+				return -1;
+			}
+			$record_row = $result->fetch_assoc();
+			$friendinfo['friendid']		= $friendid;
+			$friendinfo['name'] 		= $record_row['name'];
+			$friendinfo['logintime'] 	= $record_row['logintime'];
+			$friendinfo['maxChapter']	= chapter::getMaxChapterLevel($friendid);
+			$friendinfo['totalStar'] 	= chapter::getTotalStar($friendid);
+			return $friendinfo;
+		}
 
 		public function sendMsg(){}
 	}

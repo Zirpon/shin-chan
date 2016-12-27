@@ -30,6 +30,7 @@
 			2026	=> "recommendFriends", // playerid
 			2027	=> "searchFriendById",//friendId
 			2028	=> "getFriendlist",//guid
+			2029	=> "friendinfo",//test
 		),
 
 		"mail"		=> array(
