@@ -61,18 +61,18 @@ class seaVenture extends handler
 		$arr_json_friendlist_result = $arr_json_friendlist['result'];
 
 		$arr_friendlist = json_decode($arr_json_friendlist_result, true);
-		var_dump($arr_friendlist);
+		//var_dump($arr_friendlist);
 		$db = new db_mysql();
 		$friendRanklist = array();
 		foreach ($arr_friendlist as $value) {
-			$friendid = $value['friendid'];
+			$friendid = intval($value['friendid']);
 			$result = $db->db_query_select("select shell from t_char where guid = $friendid");
 			if (is_null($result)) {
 				continue;
 			}
 			$row = $result->fetch_assoc();
 			$score = intval($row['shell']);
-			$friendRecord = array("rank"=>0,"friendid"=>intval($value),"score"=>$score);
+			$friendRecord = array("rank"=>0, "friendid"=>$friendid, "score"=>$score);
 			$friendRanklist[] = $friendRecord;
 		}
 

@@ -1,6 +1,9 @@
 <?php
 
 	require_once dirname(__FILE__).'/../utils/handler.php';
+	require_once dirname(__FILE__).'/../friend/friend.php';
+	require_once dirname(__FILE__).'/../utils/utils.php';
+
 /**
 * player class
 */
@@ -16,14 +19,17 @@ class chapter extends handler
 
 	public function loadChapters( $guid )
 	{
+		$this->m_arrChapters = array();
 		$db = new db_mysql();
 		$result = $db->db_query_select(loadChapters.$guid);
 		if (isset($result)) {
 			$row = $result->fetch_assoc();
 			$sChapters = $row["mflag"];
-			self::getChapters($sChapters);
-
-			return TRUE;
+			//echo "\nddd".$sChapters."ddd\n";
+			if (!empty($sChapters)) {
+				self::getChapters($sChapters);
+				return TRUE;
+			}
 		}
 
 		return FALSE;
@@ -66,9 +72,10 @@ class chapter extends handler
 		return $star."-".$point."-".$firstFinishtime;
 	}
 
-	public function getChapterResult( $str )
+	public function formatChapterResult( $str )
 	{
 		$result = explode("-", $str);
+		//var_dump($result);
 		return $result;
 	}
 
@@ -80,12 +87,11 @@ class chapter extends handler
 
 		self::loadChapters($guid);
 
-
 		if (isset($this->m_arrChapters[$chapter-1])) {
 
 			$szChapterResult = $this->m_arrChapters[$chapter-1];
 
-			$arrChapterResult = self::getChapterResult($szChapterResult);
+			$arrChapterResult = self::formatChapterResult($szChapterResult);
 			$arrChapterResult[0] = ($star > intval($arrChapterResult[0]))? $star : $arrChapterResult[0];
 			$arrChapterResult[1] = ($point > intval($arrChapterResult[1]))? $point : $arrChapterResult[1];
 
@@ -119,11 +125,67 @@ class chapter extends handler
 
 		$totalStar = 0;
 		foreach ($this->m_arrChapters as $value) {
-			$arrChapterResult = self::getChapterResult($value);
+			$arrChapterResult = self::formatChapterResult($value);
 			$totalStar += $arrChapterResult[0];
 		}
 
 		return $totalStar;
 	}
+
+	public function getChapterResult($guid, $chapter)
+	{
+		if ($chapter <= 0) {
+			return response::format(ERROR_PARAMS, "chapter error:$chapter");
+		}
+
+		self::loadChapters($guid);
+
+		if (isset($this->m_arrChapters[$chapter-1])) {
+
+			$szChapterResult = $this->m_arrChapters[$chapter-1];
+
+			$arrChapterResult = self::formatChapterResult($szChapterResult);
+			return $arrChapterResult;
+		}
+
+		return NULL;
+
+	}
+
+	//every chapter point 
+	public function getfriendRanklist($guid, $chapter)
+	{
+		$json_friendlist = friend::getFriendlist($guid);
+		$arr_json_friendlist = json_decode($json_friendlist, true);
+		$arr_json_friendlist_result = $arr_json_friendlist['result'];
+
+		$arr_friendlist = json_decode($arr_json_friendlist_result, true);
+		//echo json_encode($arr_friendlist);
+		$db = new db_mysql();
+		$friendRanklist = array();
+		foreach ($arr_friendlist as $value) {
+			$friendid = intval($value['friendid']);
+			$arrChapterResult = self::getChapterResult($friendid, $chapter);
+
+			$score = intval($arrChapterResult[1]);
+			$friendRecord = array("rank"=>0,"friendid"=>$friendid,"score"=>$score);
+			$friendRanklist[] = $friendRecord;
+		}
+
+		$arrMyChapterResult = self::getChapterResult($guid, $chapter);
+		if (!is_null($arrMyChapterResult)) {
+			$score = intval($arrMyChapterResult[1]);
+			$myRecord = array("rank"=>0,"friendid"=>$guid,"score"=>$score);
+			$friendRanklist[] = $myRecord;
+		}
+
+		$friendRanklist = my_sort($friendRanklist, "score");
+		//echo json_encode($friendRanklist);
+		$friendRanklist = updateRankIndex($friendRanklist);
+
+		return response::format(ERROR_OK, json_encode($friendRanklist));
+	}
+
+
 }
 ?>

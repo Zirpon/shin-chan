@@ -243,7 +243,7 @@
 				$friendlist[] = $friendRecord;
 			}
 
-			return response::format(ERROR_OK, json_encode($friendlistpfr));
+			return response::format(ERROR_OK, json_encode($friendlist));
 		}
 
 		public function friendinfo($friendid)
