@@ -12,6 +12,7 @@ $LOGGER_TYPE = array
 	"elapsedTime"	=> LOGGERPATH."elapsedTime_".date("Y-m-d").".log",
 	"chapter"		=> LOGGERPATH."chapter_".date("Y-m-d").".log",
 	"seaVentureMgr"	=> LOGGERPATH."seaVentureMgr_".date("Y-m-d").".log",
+	"db_mysql"		=> LOGGERPATH."db_mysql_".date("Y-m-d").".log",
 );
 
 $LOGGER_SWITCH = TRUE;

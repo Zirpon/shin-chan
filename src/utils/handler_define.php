@@ -59,5 +59,10 @@
 			2061	=> "doVenture", //$guid, $score
 			2062	=> "getfriendRanklist",//guid
 		),
+
+		"chapterMgr" => array(
+			2071	=> "db_init",
+			2072	=> "getRanklist",
+		),
 	);
 ?>

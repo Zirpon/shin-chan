@@ -6,5 +6,6 @@
 	define("chapter", dirname(__FILE__).'/src/player/chapter.php');
 	define("seaVentureMgr", dirname(__FILE__).'/src/activity/seaVentureMgr.php');
 	define("seaVenture", dirname(__FILE__).'/src/player/seaVenture.php');
+	define("chapterMgr", dirname(__FILE__).'/src/activity/chapterMgr.php');
 
 ?>

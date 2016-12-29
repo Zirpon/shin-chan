@@ -43,6 +43,7 @@
 
         for ($i=0; $i < count($ranklist); $i++) { 
             $ranklist[$i]["rank"] = $i + 1;
+            //echo json_encode($ranklist[$i])."\n";
         }
 
         return $ranklist;

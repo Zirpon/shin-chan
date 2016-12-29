@@ -69,7 +69,9 @@ $GLOBALS['DB_SOCKET']  = "/data/lib/mysql/mysql.sock";
         }
 
         $result = $this->m_conn->query($sql_str);
+        //echo $sql_str.var_dump($result);
         if ($result == FALSE) {
+            logger::error("db_query_select:".$sql_str."\nreason:".$this->m_conn->error, __CLASS__);
             return NULL;
         }
 

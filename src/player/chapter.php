@@ -3,6 +3,7 @@
 	require_once dirname(__FILE__).'/../utils/handler.php';
 	require_once dirname(__FILE__).'/../friend/friend.php';
 	require_once dirname(__FILE__).'/../utils/utils.php';
+	require_once dirname(__FILE__).'/../activity/chapterMgr.php';
 
 /**
 * player class
@@ -22,17 +23,20 @@ class chapter extends handler
 		$this->m_arrChapters = array();
 		$db = new db_mysql();
 		$result = $db->db_query_select(loadChapters.$guid);
-		if (isset($result)) {
+		//var_dump($result);
+
+		if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
 			$sChapters = $row["mflag"];
 			//echo "\nddd".$sChapters."ddd\n";
 			if (!empty($sChapters)) {
 				self::getChapters($sChapters);
-				return TRUE;
+				return 1;
 			}
+			return 0;
 		}
 
-		return FALSE;
+		return -1;
 	}
 
 	public function saveChapters( $guid )
@@ -79,29 +83,45 @@ class chapter extends handler
 		return $result;
 	}
 
-	public function updateChapter($guid, $chapter, $star, $point, $firstFinishtime)
+	public function updateChapter($guid, $chapter, $star, $point)
 	{
 		if ($chapter <= 0) {
 			return response::format(ERROR_PARAMS, "chapter error:$chapter");
 		}
 
-		self::loadChapters($guid);
+		$res = self::loadChapters($guid);
 
+		if ($res < 0) {
+			return response::format(ERROR_PARAMS, "guid error:$guid");
+		}
+
+		$maxFinishChapter = count($this->m_arrChapters);
+
+		if ( ($maxFinishChapter+1) < $chapter ) {
+			return response::format(ERROR_PARAMS, "chapter error:chapter $chapter > maxFinishChapter $maxFinishChapter");
+		}
+
+		$updateStar = $star;
+		$updatePoint = $point;
+		$firstFinishtime = time();
 		if (isset($this->m_arrChapters[$chapter-1])) {
 
 			$szChapterResult = $this->m_arrChapters[$chapter-1];
 
 			$arrChapterResult = self::formatChapterResult($szChapterResult);
-			$arrChapterResult[0] = ($star > intval($arrChapterResult[0]))? $star : $arrChapterResult[0];
-			$arrChapterResult[1] = ($point > intval($arrChapterResult[1]))? $point : $arrChapterResult[1];
+			$updateStar = ($star > intval($arrChapterResult[0]))? $star : $arrChapterResult[0];
+			$updatePoint = ($point > intval($arrChapterResult[1]))? $point : $arrChapterResult[1];
+			$firstFinishtime = ($point > intval($arrChapterResult[1]))? $firstFinishtime : $arrChapterResult[2];
 
-			$this->m_arrChapters[$chapter-1] = self::formatChapter($arrChapterResult[0], $arrChapterResult[1], $arrChapterResult[2]);
+			chapterMgr::updateRanklist($guid, $chapter, $updateStar, $updatePoint, $firstFinishtime);
 		}
 		else
 		{
-			$this->m_arrChapters[$chapter-1] = self::formatChapter($star, $point, $firstFinishtime);	
+			chapterMgr::insertRanklist($guid, $chapter, $updateStar, $updatePoint, $firstFinishtime);
 		}
-
+		
+		$this->m_arrChapters[$chapter-1] = self::formatChapter($updateStar, $updatePoint, $firstFinishtime);	
+		
 		self::saveChapters($guid);
 
 		return response::format(ERROR_OK, "chapter update ok");

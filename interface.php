@@ -67,6 +67,10 @@
 		include  seaVenture;
 		$handler = new seaVenture();
 	}
+	else if ($params["handler"] === "chapterMgr" ) {
+		include  chapterMgr;
+		$handler = new chapterMgr();
+	}
 	else
 	{
 		logger::error("request handler error".json_encode($params), "interface");
