@@ -97,7 +97,7 @@
 					$msgList[] = $row;
 				}
 				//var_dump($msgList);
-				return response::format(ERROR_OK, json_encode($msgList));
+				return response::format(ERROR_OK, $msgList);
 			}
 
 			return response::format(ERROR_MYSQL, "no mail");

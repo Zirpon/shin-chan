@@ -146,10 +146,8 @@ class chapterMgr extends handler
 		//echo json_encode($ranklist)."\n";
 		$ranklist = updateRankIndex($ranklist);
 
-		return response::format(ERROR_OK, json_encode($ranklist));
+		return response::format(ERROR_OK, $ranklist);
 	}
-
-
 
 }
 

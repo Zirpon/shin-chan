@@ -56,7 +56,7 @@ class seaVentureMgr extends handler
 			return response::format(ERROR_SEAVENTURENOTONSHOW, "NOT ON SHOW");
 		}
 		
-		return response::format(ERROR_OK, json_encode(self::$m_arrRanklist));
+		return response::format(ERROR_OK, self::$m_arrRanklist);
 	}
 
 	public function ranklistSort()

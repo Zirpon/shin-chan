@@ -80,7 +80,7 @@ class seaVenture extends handler
 		//echo json_encode($friendRanklist);
 		$friendRanklist = updateRankIndex($friendRanklist);
 
-		return response::format(ERROR_OK, json_encode($friendRanklist));
+		return response::format(ERROR_OK, $friendRanklist);
 	}
 }
 ?>

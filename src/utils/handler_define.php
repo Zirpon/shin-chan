@@ -17,12 +17,12 @@
 			2012	=> "getMsgList",//guid
 		//	2013	=> "getMsg",//msgid
 		//	2014	=> "readMsg",//msgid
-			2015	=> "handleMsg",//guid msgid
+			2015	=> "handleMsg",//guid msgid, $opt
 			2016	=> "getTimestamp",
 		),
 
 		"friend"	=> array(
-			2021	=> "createFriend",//$playerid, $friendid
+			//2021	=> "createFriend",//$playerid, $friendid
 			2022	=> "sendGift",//$playerid, $playername, $friendid, $friendname 
 			2023	=> "unfriend",//$playerid, $friendid
 			2024	=> "requestGift",

@@ -167,8 +167,6 @@
 
 		public function recommendFriends( $guid )
 		{
-			include dirname(__FILE__).'/../player/chapter.php';
-
 			$db = new db_mysql();
 
 			$param = array($guid);
@@ -204,7 +202,7 @@
 			}
 
 			logger::write("recommendFriends success: ".print_r($ret, true), __CLASS__);
-			return response::format(ERROR_OK, json_encode($ret));
+			return response::format(ERROR_OK, $ret);
 		}
 	
 		public function searchFriendById($friendid)
@@ -214,7 +212,7 @@
 			$friendinfo = self::friendinfo($friendid);
 			if ($friendinfo != -1) {
 				logger::write("searchFriendById success: ".print_r($friendinfo, true), __CLASS__);
-				return response::format(ERROR_OK, json_encode($friendinfo));	
+				return response::format(ERROR_OK, $friendinfo);	
 			}
 			
 			return response::format(ERROR_PARAMS, "id error $friendid");
@@ -243,7 +241,7 @@
 				$friendlist[] = $friendRecord;
 			}
 
-			return response::format(ERROR_OK, json_encode($friendlist));
+			return response::format(ERROR_OK, $friendlist);
 		}
 
 		public function friendinfo($friendid)

@@ -5,6 +5,19 @@
 	include dirname(__FILE__).'/src/utils/handler_define.php';
 	include dirname(__FILE__).'/src/utils/error_code.php';
 
+	error_reporting(0);
+
+	register_shutdown_function('handleFatalPhpError');
+
+	function handleFatalPhpError() {
+		$last_error = error_get_last();
+
+		if($last_error['type'] === E_ERROR) {
+			logger::error("handleFatalPhpError:".print_r($last_error, true), "php_error");
+			echo response::format(ERROR_PARAMS, "json_data error")."\n";
+		}
+	}
+
 	$params = $_GET;
 	$data	= $_POST;
 	//$dddd 	= $_REQUEST;
@@ -77,9 +90,11 @@
 		return response::format(ERROR_PARAMS, "handler error");
 	}
 
-
 	$function = $GLOBALS["handlers"][$params["handler"]][$params["findex"]];
 
 	$result = $handler->process($function, $packet);
+	//var_dump(error_get_last());
+
 	echo $result."\n";
+
 ?>
