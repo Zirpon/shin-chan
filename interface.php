@@ -31,6 +31,9 @@
 		return response::format(ERROR_PARAMS, "interface request error");
 	}
 
+	$function = $GLOBALS["handlers"][$params["handler"]][$params["findex"]];
+  	logger::write("handle func name : ".$function, "interface");
+
 	$packet = array();
 	if (isset($data['json_data'])) {
 		$json_data = $data['json_data'];
@@ -48,7 +51,6 @@
 	}
 
   	logger::write("request packet:".print_r($packet, true), "interface");
-
 
 	$handler = NULL;
 
@@ -90,7 +92,6 @@
 		return response::format(ERROR_PARAMS, "handler error");
 	}
 
-	$function = $GLOBALS["handlers"][$params["handler"]][$params["findex"]];
 
 	$result = $handler->process($function, $packet);
 	//var_dump(error_get_last());

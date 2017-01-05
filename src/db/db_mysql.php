@@ -56,7 +56,7 @@ $GLOBALS['DB_SOCKET']  = "/data/lib/mysql/mysql.sock";
             //echo "新记录插入成功";
             return TRUE;
         } else {
-            echo "Error: " . $sql_str . "<br>" . $this->m_conn->error;
+            logger::error("db_query_insert:".$sql_str."\nreason:".$this->m_conn->error, __CLASS__);
             return FALSE;
         }
     }

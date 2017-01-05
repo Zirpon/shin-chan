@@ -43,7 +43,7 @@
 
 	        logger::write("newMsg success:".$senderid."|".$receiverid."|".$type."|".$content."|".$deadline, __CLASS__);
 
-			return response::format(ERROR_OK, "send msg ok");
+			return response::format(ERROR_OK, "new msg ok");
 		}
 
 		public function getMsgList( $guid )
@@ -55,7 +55,7 @@
 
 			//filter the deadline msg and set isvalid to false
 			$db = new db_mysql();
-			$sql = "select * from t_msgqueue where isvalid = 1 and (senderid = ".$guid." or receiverid = ".$guid.");";
+			$sql = "select * from t_msgqueue where isvalid = 1 and (receiverid = ".$guid.");";//" or senderid = ".$guid.
 			$result = $db->db_query_select($sql);
 			if (isset($result) && $result->num_rows > 0) {
 				$msgList = array();
@@ -146,14 +146,21 @@
 
 						if ( $opt == 1 ) {
 							//receiver handle this msg with sending gift back
-							$result = friend::sendGift($msg["senderid"], $sendername, $msg["receiverid"], $receivername);
-							if ( 0 !==  $result )
+							$result = friend::sendGift($msg["receiverid"], $receivername, $msg["senderid"], $sendername);
+							if ( 0 !=  $result )
 							{
 								logger::write("handleMsg : send gift error", __CLASS__);
 								return response::format(ERROR_MYSQL, "send gift error");
 							}
 						}
 						
+						self::readMsg($msgid);
+					}
+					break;
+
+				case eMsgType_sendGift:
+					{
+						logger::write("handleMsg : got sendGift ".print_r($msg,true), __CLASS__);		
 						self::readMsg($msgid);
 					}
 					break;

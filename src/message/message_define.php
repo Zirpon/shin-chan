@@ -3,7 +3,7 @@
 	define('eMsgType_begin', 			0);
 	
 	define("eMsgType_addFriend",	eMsgType_begin+1);
-	//define("eMsgType_sendGift",		eMsgType_begin+2);
+	define("eMsgType_sendGift",		eMsgType_begin+2);
 	define("eMsgType_requestGift",	eMsgType_begin+3);
 	define("eMsgType_sendMsg",		eMsgType_begin+4);
 	//define("eMsgType_sendMail",		eMsgType_begin+5);

@@ -1,6 +1,6 @@
 <?php
 	require_once dirname(__FILE__).'/../account/account.php';
-	require_once dirname(__FILE__).'/../message/message_define.php';
+	require_once dirname(__FILE__).'/../message/message.php';
 	require_once dirname(__FILE__).'/../mail/mail.php';
 	require_once dirname(__FILE__).'/../player/chapter.php';
 
@@ -20,8 +20,8 @@
 			$stmt = $db->db_getConn()->prepare($sql);
 	        
 	        if (!is_object($stmt)) {
-	   			logger::error("newMsg error:".$playerid."|".$friendid." ".$db->get_getConn()->error, __CLASS__);
-				return response::format(ERROR_MYSQL, "db sql error");
+	   			logger::error("newMsg error:".$playerid."|".$friendid."|$sql ".$db->get_getConn()->error, __CLASS__);
+				return response::format(ERROR_MYSQL, "create friend db sql error");
 			}
 
 	        $stmt->bind_param($GLOBALS['sqlmould'][$format], $playerid, $friendid);
@@ -35,8 +35,8 @@
 			$stmt = $db->db_getConn()->prepare($sql);
 
 	        if (!is_object($stmt)) {
-	   			logger::error("newMsg error:".$playerid."|".$friendid." ".$db->get_getConn()->error, __CLASS__);
-				return response::format(ERROR_MYSQL, "db sql error");
+	   			logger::error("newMsg error:".$playerid."|".$friendid."|$sql ".$db->get_getConn()->error, __CLASS__);
+				return response::format(ERROR_MYSQL, "makeup friend db sql error");
 			}
 
 	        $stmt->bind_param($GLOBALS['sqlmould'][$format], $playerid, $friendid);
@@ -81,7 +81,7 @@
 			$db = new db_mysql();
 			$result = $db->db_query_select("update t_friend set requestGift = 1 where 
 											playerid = $playerid and friendid = $friendid");
-			var_dump($result);
+			//var_dump($result);
 			if (is_null($result)) {
 				return false;
 			}
@@ -106,7 +106,7 @@
 
 			$row = $result->fetch_assoc();
 			//var_dump($row);
-			$isRequestGift = $row['requestGift'];
+			$isRequestGift = intval($row['requestGift']);
 
 			return $isRequestGift;
 		}
@@ -118,12 +118,18 @@
 				return -1;
 			}
 
-			$res =  mail::sendMail(2, $playerid, $playername, $friendid, $friendname);
-			if ($result == 0) {
+			//$res =  mail::sendMail(2, $playerid, $playername, $friendid, $friendname);
+			$res =  self::sendMsg($playerid, $friendid, eMsgType_sendGift);
+			//$arrRes = json_decode($res, true);
+			//$errCode = $arrRes['errCode'];
+			//var_dump($arrRes);
+			if ($res == 0) {
 				$db = new db_mysql();
 				$result = $db->db_query_select("update t_friend set requestGift = 0 where playerid = $friendid 
 												and friendid = $playerid and isvalid = 1");
 			}
+
+  			logger::write("sendGift:".$playerid.":".$playername."|".$friendid.":".$friendname, __CLASS__);
 
 			return $res;
 	    }
@@ -221,7 +227,7 @@
 		public function getFriendlist( $guid )
 		{
 			$db = new db_mysql();
-			$result = $db->db_query_select("select friendid from t_friend where playerid = $guid;");
+			$result = $db->db_query_select("select friendid from t_friend where playerid = $guid and isvalid = 1;");
 			if (is_null($result)) {
 				return false;
 			}
@@ -263,6 +269,13 @@
 			return $friendinfo;
 		}
 
-		public function sendMsg(){}
+		public function sendMsg($senderid, $receiverid, $type, $content = "", $deadline = iMsgTimeOut_1da)
+		{
+			$result = message::newMsg($senderid, $receiverid, $type, $content, $deadline = iMsgTimeOut_1day);
+			$arrResult = json_decode($result, true);
+			$errCode = $arrResult['errCode'];
+			
+			return $errCode;
+		}
 	}
 ?>

@@ -39,7 +39,7 @@ class chapterMgr extends handler
 		$result = $db->db_query_select("show tables like \"$tableName\"");
 
 		if ($result->num_rows == 1) {
-			echo "\n$tableName already exists\n";
+			//echo "\n$tableName already exists\n";
 			return true;
 		}
 
@@ -66,7 +66,7 @@ class chapterMgr extends handler
 		$result = $db->db_query_select($sql);
 
 		if ($result == true) {
-			echo "create table $tableName success\n";
+			//echo "create table $tableName success\n";
 		}
 
 		return $result;

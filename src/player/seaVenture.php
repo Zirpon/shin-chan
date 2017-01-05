@@ -33,7 +33,7 @@ class seaVenture extends handler
 
 		$result = $db->db_query_select("select name from t_char where guid = $guid;");
 		$row = $result->fetch_assoc();
-		var_dump($row);
+		//var_dump($row);
 		$name = $row['name'];
 
 		$ptr->insertRanklist($guid, $name, 0, $score);
