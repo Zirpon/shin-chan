@@ -3,7 +3,9 @@
 	require_once dirname(__FILE__).'/../message/message.php';
 	require_once dirname(__FILE__).'/../mail/mail.php';
 	require_once dirname(__FILE__).'/../player/chapter.php';
+	require_once dirname(__FILE__).'/../player/sendgiftnum.php';
 
+	define("sendFriendGiftLimit", 1);
 	
 	class friend extends handler
 	{
@@ -93,7 +95,7 @@
 		{
 			$bIsfriend = self::isFriend($playerid, $friendid);
 			if ($bIsfriend == false) {
-				return false;
+				return -1;
 			}
 
 			$db = new db_mysql();
@@ -118,20 +120,67 @@
 				return -1;
 			}
 
+			if (sendgiftnum::bIsOver($playerid) == true) {
+				return -1;
+			}
+
 			//$res =  mail::sendMail(2, $playerid, $playername, $friendid, $friendname);
 			$res =  self::sendMsg($playerid, $friendid, eMsgType_sendGift);
 			//$arrRes = json_decode($res, true);
 			//$errCode = $arrRes['errCode'];
 			//var_dump($arrRes);
+			
 			if ($res == 0) {
-				$db = new db_mysql();
-				$result = $db->db_query_select("update t_friend set requestGift = 0 where playerid = $friendid 
-												and friendid = $playerid and isvalid = 1");
+				//$db = new db_mysql();
+				//$result = $db->db_query_select("update t_friend set requestGift = 0 where playerid = $friendid and friendid = $playerid and isvalid = 1");
+				sendgiftnum::update($playerid, 1);
 			}
+
 
   			logger::write("sendGift:".$playerid.":".$playername."|".$friendid.":".$friendname, __CLASS__);
 
 			return $res;
+	    }
+
+	    public function bIsSendGiftOver($playerid, $friendid)
+	    {
+			$bIsfriend = self::isFriend($playerid, $friendid);
+			if ($bIsfriend == false) {
+				return -1;
+			}
+
+			$db = new db_mysql();
+			$result = $db->db_query_select("select giftcount from t_friend where playerid = $playerid 
+											and friendid = $friendid;");
+			//var_dump($result);
+			if ($result->num_rows <= 0) {
+				return -1;
+			}
+
+			$row = $result->fetch_assoc();
+			//var_dump($row);
+			$giftcount = intval($row['giftcount']);
+
+			if (sendFriendGiftLimit > $giftcount) {
+				return true;
+			}
+
+			return false;
+	    }
+
+	    public function sendGiftMsg($playerid, $friendid)
+	    {
+			$bIsfriend = self::isFriend($playerid, $friendid);
+			if ($bIsfriend == false) {
+				return -1;
+			}
+
+			$db = new db_mysql();
+			$result = $db->db_query_select("update t_friend set giftcount = 1 where playerid = $playerid 
+											and friendid = $friendid;");
+			//var_dump($result);
+
+			return $result;
 	    }
 
 	    public function cleanRequestGiftStatus()
@@ -188,23 +237,27 @@
 				$friend = array();
 				$friend['guid'] 		= $rows['guid'];
 				$friend['name'] 		= $rows['name'];
+				$friend['sex'] 			= intval($rows['sex']);
 				$friend['logintime'] 	= $rows['logintime'];
+				$friend['shell'] 		= intval($rows['shell']);
 				$friend['maxChapter']	= chapter::getMaxChapterLevel($friend['guid']);//no new use member var any harm
 				$friend['totalStar'] 	= chapter::getTotalStar($friend['guid']);
 
 				$ret[] = $friend;
 				//var_dump($friend);
-				$result->close();
+				//$result->close();
+				/*
 				if ( true == $db->db_getConn()->more_results() )
 				{
 					$db->db_cleanQuery();
 					$result = $db->db_getConn()->store_result();
-					//echo "ddddd ".is_object($result);
+					var_dump($result);
+					echo "ddddd ".is_object($result);
 				}
 				if (!is_object($result)) {
+					echo "hell";
 					break;
-				}
-
+				}*/
 			}
 
 			logger::write("recommendFriends success: ".print_r($ret, true), __CLASS__);
@@ -215,7 +268,7 @@
 		{
 			$db = new db_mysql();
 
-			$friendinfo = self::friendinfo($friendid);
+			$friendinfo = account::charinfo($friendid);
 			if ($friendinfo != -1) {
 				logger::write("searchFriendById success: ".print_r($friendinfo, true), __CLASS__);
 				return response::format(ERROR_OK, $friendinfo);	
@@ -229,27 +282,31 @@
 			$db = new db_mysql();
 			$result = $db->db_query_select("select friendid from t_friend where playerid = $guid and isvalid = 1;");
 			if (is_null($result)) {
-				return false;
+				return -1;
 			}
 
 			$friendlist = array();
 			
 			$db_queryRecord = new db_mysql();
-
+			//var_dump($result);
 			while ( $rows = $result->fetch_assoc() ) {
 				//var_dump($rows);
 				$friendRecord =array();
 
 				$friendid = $rows['friendid'];
 
-				$friendRecord = self::friendinfo($friendid);
+				$friendRecord = account::charinfo($friendid);
 				
 				$friendlist[] = $friendRecord;
 			}
+			$myRecord = array();
+			$myRecord = account::charinfo($guid);
+			$friendlist[] = $myRecord;
 
 			return response::format(ERROR_OK, $friendlist);
 		}
 
+		/*
 		public function friendinfo($friendid)
 		{
 			$db = new db_mysql();
@@ -267,7 +324,7 @@
 			$friendinfo['maxChapter']	= chapter::getMaxChapterLevel($friendid);
 			$friendinfo['totalStar'] 	= chapter::getTotalStar($friendid);
 			return $friendinfo;
-		}
+		}*/
 
 		public function sendMsg($senderid, $receiverid, $type, $content = "", $deadline = iMsgTimeOut_1da)
 		{

@@ -1888,8 +1888,8 @@ CREATE TABLE `t_char` (
   `mflag` text CHARACTER SET latin1 NOT NULL,
   `shell` int(11) NOT NULL,
   `firstlogin` int(11) NOT NULL DEFAULT '0',
-  `silver` int(11) NOT NULL,
-  `gold` int(11) NOT NULL,
+  `sendgiftnum` int(11) NOT NULL,
+  `gotgiftnum` int(11) NOT NULL,
   `lastloginip` bigint(11) NOT NULL DEFAULT '0',
   `newcharname` varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '@',
   PRIMARY KEY (`gid`),
@@ -1918,7 +1918,7 @@ CREATE TABLE `t_friend` (
   `requestGift` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `playerid` (`playerid`,`friendid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1965,7 +1965,7 @@ CREATE TABLE `t_msgqueue` (
   `createtime` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `playerid` (`senderid`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2014,22 +2014,6 @@ CREATE TABLE `t_var` (
   `maxcharguid` int(11) unsigned NOT NULL,
   PRIMARY KEY (`maxcharguid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `tmpranklist`
---
-
-DROP TABLE IF EXISTS `tmpranklist`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tmpranklist` (
-  `rank` int(11) NOT NULL,
-  `guid` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `sex` int(11) NOT NULL,
-  `score` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2296,6 +2280,20 @@ BEGIN
 	declare timeinterval int default 2592000;
 	set timeinterval = UNIX_TIMESTAMP() - timeinterval;
 
+CREATE TEMPORARY TABLE `t_recomfriends` (
+  `gid` int(11) NOT NULL AUTO_INCREMENT,
+  `guid` int(11) unsigned NOT NULL,
+  `name` varchar(50) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `sex` smallint(6) NOT NULL,
+  `logintime` int(11) NOT NULL,
+  `mflag` text CHARACTER SET latin1 NOT NULL,
+  `shell` int(11) NOT NULL,
+  PRIMARY KEY (`gid`),
+  UNIQUE KEY `Index_guid` (`guid`),
+  UNIQUE KEY `Index_name` (`name`) USING HASH
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 	start transaction;
 
 	#drop table if exists tmp_recomFriends;
@@ -2308,30 +2306,39 @@ BEGIN
 	REPEAT
 		set @rankseed = @rankseed + 1;
 		#select @rankseed;
-		set @num = RAND(@rankseed);
+		set @num = RAND(RAND()*1000000);
+		#SELECT @num;
+		set @fix= @num*@maxgid;
+		#select @fix;
 		set @querygid = FLOOR(@num*@maxgid);
-
-		set @recommendid = (select guid from t_char where gid = @querygid and isvalid = 1);
-		#select @recommendid + "+++++++++++++++++++++++++++++++++++++++++++++++";
 		#select @querygid;
-		#select pplayerid;
-		#IF ISNULL(@recommendid) then 
-			#set @recommendid = 0;
-			#select @recommendid;
-		#END IF;
 
-		IF @recommendid <> pplayerid THEN
-			set @exists = 0;
-			select count(*) into @exists from t_friend where playerid = pplayerid and friendid = @recommendid and isvalid = 1;
-			#select @exists + "==========================================";
-			#已加好友继续找
-			IF @exists = 0 THEN
-				#select @querygid;
-				select gid,guid,name,logintime,mflag from t_char where gid = @querygid;#and logintime > timeinterval and mflag != "";
-				set cnt = cnt - 1;
+		select COUNT(*) into @tmpExists from t_recomfriends where gid = @querygid;
+		IF @tmpExists = 0 THEN
+			set @recommendid = (select guid from t_char where gid = @querygid and isvalid = 1);
+			#select @recommendid + "+++++++++++++++++++++++++++++++++++++++++++++++";
+			#select @querygid;
+			#select pplayerid;
+			#IF ISNULL(@recommendid) then 
+				#set @recommendid = 0;
+				#select @recommendid;
+			#END IF;
+
+			IF @recommendid <> pplayerid THEN
+				set @exists = 0;
+				select count(*) into @exists from t_friend where playerid = pplayerid and friendid = @recommendid and isvalid = 1;
+				#select @exists + "+++++++++";
+				#select @recommendid + "==========================================";
+				#已加好友继续找
+				IF @exists = 0 THEN
+					#select @querygid;
+					INSERT INTO t_recomfriends (gid,guid,name,sex,logintime,mflag,shell)
+					(select gid,guid,name,sex,logintime,mflag,shell from t_char where gid = @querygid);#and logintime > timeinterval and mflag != "";
+					set cnt = cnt - 1;
+				END IF;
 			END IF;
-		END IF;
 
+		END IF;
 	#调试 set @times = @times - 1;
 
 	UNTIL cnt <= 0 or @times <= 0 END REPEAT;
@@ -2341,7 +2348,8 @@ BEGIN
 		select gid,guid,name,logintime,mflag from t_char where logintime > timeinterval and mflag != "" limit cnt
 	);
 	*/
-
+	
+	select * from t_recomfriends;
 	commit;
 	#SELECT result;
 END ;;
@@ -2483,4 +2491,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-05 15:20:14
+-- Dump completed on 2017-01-06 18:34:59

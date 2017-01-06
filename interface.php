@@ -14,7 +14,7 @@
 
 		if($last_error['type'] === E_ERROR) {
 			logger::error("handleFatalPhpError:".print_r($last_error, true), "php_error");
-			echo response::format(ERROR_PARAMS, "json_data error")."\n";
+			echo response::format(ERROR_PARAMS, "php fatal error")."\n";
 		}
 	}
 
@@ -28,7 +28,7 @@
 	if (!isset($params['handler']) || !isset($params['findex'])) 
 	{
 		logger::error("request error".json_encode($params)."\n".print_r($data, true), "interface");
-		return response::format(ERROR_PARAMS, "interface request error");
+		echo response::format(ERROR_PARAMS, "interface request error")."\n";
 	}
 
 	$function = $GLOBALS["handlers"][$params["handler"]][$params["findex"]];
@@ -46,7 +46,7 @@
 		$packet = json_decode(urldecode($json_data), true);
 		if (is_null($packet)) {
 			logger::error("packet parse error", "interface");
-			return response::format(ERROR_PARAMS, "packet parse error");
+			echo response::format(ERROR_PARAMS, "packet parse error")."\n";
 		}
 	}
 

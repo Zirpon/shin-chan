@@ -3,6 +3,7 @@
 	require_once dirname(__FILE__).'/../log/logger.php';
 	require_once dirname(__FILE__).'/../utils/handler.php';
 	require_once dirname(__FILE__).'/../utils/elapsedTime.php';
+	require_once dirname(__FILE__).'/../player/chapter.php';
 
 	define("dayu", 1);
 	define("guest", 2);
@@ -226,6 +227,26 @@
 			}
 
 			return response::format($errCode, $res);
+		}
+
+		public function charinfo($charguid)
+		{
+			$db = new db_mysql();
+
+			$charinfo = array();
+			$result = $db->db_query_select("select name,sex,logintime from t_char where guid = $charguid;");
+			//var_dump($result);
+			if ($result->num_rows <= 0) {
+				return -1;
+			}
+			$record_row = $result->fetch_assoc();
+			$charinfo['guid']		= $charguid;
+			$charinfo['name'] 		= $record_row['name'];
+			$charinfo['sex'] 		= $record_row['sex'];
+			$charinfo['logintime'] 	= $record_row['logintime'];
+			$charinfo['maxChapter']	= chapter::getMaxChapterLevel($charguid);
+			$charinfo['totalStar'] 	= chapter::getTotalStar($charguid);
+			return $charinfo;
 		}
 	}
 

@@ -4,6 +4,7 @@
 	//require_once dirname(__FILE__).'/../utils/handler.php';
 	require_once dirname(__FILE__).'/../account/account.php';
 	require_once dirname(__FILE__).'/../friend/friend.php';
+	require_once dirname(__FILE__).'/../player/gotgiftnum.php';
 	require_once dirname(__FILE__).'/message_define.php';
 
 	class message extends handler
@@ -19,6 +20,12 @@
 	        	$isRequestGift = friend::isRequestGift($senderid, $receiverid);
 	        	if ($isRequestGift == 1) {
 	        		return response::format(ERROR_ISREQUESTFRIENDGIFT, "already request friend gift, wait your friend response");
+	        	}	
+	        }
+
+	        if ($type == eMsgType_sendGift) {
+	        	if (friend::bIsSendGiftOver() == true) {
+	        		return response::format(-1, "already send friend gift");
 	        	}	
 	        }
 
@@ -39,6 +46,10 @@
 
 	        if ($type == eMsgType_requestGift) {
 	        	friend::requestGift($senderid, $receiverid);
+	        }
+
+	        if ($type == eMsgType_sendGift) {
+	        	friend::sendGiftMsg($senderid, $receiverid);
 	        }
 
 	        logger::write("newMsg success:".$senderid."|".$receiverid."|".$type."|".$content."|".$deadline, __CLASS__);
@@ -63,6 +74,18 @@
 					$msgList[] = $row;
 				}
 				//var_dump($msgList);
+			}
+
+			$listLen = count($msgList);
+
+			for ($i=0; $i < $listLen; $i++) { 
+				$msg = &$msgList[$i];
+				$senderid = $msg['senderid'];
+				$senderinfo = account::charinfo($senderid);
+				$senderinfo['isRequestGift'] = friend::isRequestGift($guid, $senderid);
+				$msg['senderinfo'] = $senderinfo;
+
+				//echo json_encode($msg['senderinfo'])."\n";
 			}
 
 			return response::format(ERROR_OK, $msgList);
@@ -160,7 +183,13 @@
 
 				case eMsgType_sendGift:
 					{
-						logger::write("handleMsg : got sendGift ".print_r($msg,true), __CLASS__);		
+						if (gotgiftnum::bIsOver() == true) {
+							logger::write("handleMsg : got sendgift error over limit", __CLASS__);
+							return response::format(-1, "got sendgift error over limit");
+						}
+
+						gotgiftnum::update($playerid, 1);
+						logger::write("handleMsg : got sendGift ".print_r($msg, true), __CLASS__);		
 						self::readMsg($msgid);
 					}
 					break;

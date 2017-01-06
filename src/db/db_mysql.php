@@ -135,6 +135,11 @@ $GLOBALS['DB_SOCKET']  = "/data/lib/mysql/mysql.sock";
         //echo  $sql_str_head;
         //echo "<br>";
         $result = $this->m_conn->query($sql_str_head);
+        
+        if ($result == FALSE) {
+            logger::error("db_proc:".$sql_str_head."\nreason:".$this->m_conn->error, __CLASS__);
+            return NULL;
+        }
 
         return $result;
     }
