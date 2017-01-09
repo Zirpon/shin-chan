@@ -7,8 +7,8 @@
 	define("loadArchive",			"select mdata from t_char where guid = ");
 
 	//message
-	define("newMesssage",	"insert into t_msgqueue ( senderid, receiverid, type, status, isvalid, content, deadline ) 
-							values ( ?, ?, ?, 0, 1, ?, ?);");
+	define("newMesssage",	"insert into t_msgqueue ( senderid, receiverid, type, status, isvalid, content, deadline,createtime ) 
+							values ( ?, ?, ?, 0, 1, ?, ?, ?);");
 	define("readMsg",	"update t_msgqueue set isvalid = 0 where id = ?;");
 
 	//friend
@@ -36,7 +36,7 @@
 //////////////////////////////////////////////////////////////////////////////////////	
 	$sqlmould = array(
 		"archive" 		=> "si",
-		"newMesssage"	=> "iiisi",
+		"newMesssage"	=> "iiisii",
 		"readMsg" 		=> "i",
 		"createfriend" 	=> "ii",
 		"makeupfriend" 	=> "ii",

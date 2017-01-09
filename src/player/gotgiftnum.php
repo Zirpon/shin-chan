@@ -12,7 +12,7 @@ class gotgiftnum extends handler
 	public function load($guid)
 	{
 		$db = new db_mysql();
-		$result = $db->db_query_select("select gotgiftnum form t_char where guid = $guid;");
+		$result = $db->db_query_select("select gotgiftnum from t_char where guid = $guid;");
 		if (is_null($result)) {
 			return -1;
 		}

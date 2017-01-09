@@ -110,7 +110,7 @@
 			//var_dump($row);
 			$isRequestGift = intval($row['requestGift']);
 
-			return $isRequestGift;
+			return (boolean)$isRequestGift;
 		}
 
 		public function sendGift($playerid, $playername, $friendid, $friendname )
@@ -161,7 +161,7 @@
 			//var_dump($row);
 			$giftcount = intval($row['giftcount']);
 
-			if (sendFriendGiftLimit > $giftcount) {
+			if (sendFriendGiftLimit <= $giftcount) {
 				return true;
 			}
 
@@ -287,7 +287,6 @@
 
 			$friendlist = array();
 			
-			$db_queryRecord = new db_mysql();
 			//var_dump($result);
 			while ( $rows = $result->fetch_assoc() ) {
 				//var_dump($rows);
@@ -296,12 +295,15 @@
 				$friendid = $rows['friendid'];
 
 				$friendRecord = account::charinfo($friendid);
-				
+				$friendRecord['isRequestGift']	= self::isRequestGift($guid, $friendid);
+				$friendRecord['isSendGift']	   	= self::bIsSendGiftOver($guid, $friendid);
 				$friendlist[] = $friendRecord;
 			}
 			$myRecord = array();
 			$myRecord = account::charinfo($guid);
 			$friendlist[] = $myRecord;
+
+			$friendlist = my_sort($friendlist, "totalStar", "maxChapter");
 
 			return response::format(ERROR_OK, $friendlist);
 		}
@@ -326,9 +328,9 @@
 			return $friendinfo;
 		}*/
 
-		public function sendMsg($senderid, $receiverid, $type, $content = "", $deadline = iMsgTimeOut_1da)
+		public function sendMsg($senderid, $receiverid, $type, $content = "", $deadline = iMsgTimeOut_1day)
 		{
-			$result = message::newMsg($senderid, $receiverid, $type, $content, $deadline = iMsgTimeOut_1day);
+			$result = message::newMsg($senderid, $receiverid, $type, $content, $deadline);
 			$arrResult = json_decode($result, true);
 			$errCode = $arrResult['errCode'];
 			

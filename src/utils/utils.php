@@ -1,6 +1,6 @@
 <?php
 
-    function my_sort( $arrays, $sort_key, $sort_order=SORT_ASC, $sort_type=SORT_NUMERIC ){   
+    function my_sort( $arrays, $sort_key, $second_key="", $sort_order=SORT_ASC, $sort_type=SORT_NUMERIC ){   
         //echo "-----------------------------------------------------------\n";
 
         //echo json_encode($arrays);
@@ -21,9 +21,20 @@
 	        				$tmp = $arrays[$k+1];
 	        				$arrays[$k+1] = $arrays[$k];
 	        				$arrays[$k] = $tmp;
-
 	        				//echo "\nswap $k\n";
 	        			}
+                        else if ($value == $prevalue) {
+                            if (!empty($second_key)) {
+                                $sec_value = $arrays[$k+1][$second_key];
+                                $pre_sec_value = $arrays[$k][$second_key];
+
+                                if ($sec_value > $pre_sec_value) {
+                                    $tmp = $arrays[$k+1];
+                                    $arrays[$k+1] = $arrays[$k];
+                                    $arrays[$k] = $tmp;
+                                }
+                            }
+                        }
 	        		}
 				}
 			}

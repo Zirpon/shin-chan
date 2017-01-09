@@ -18,7 +18,7 @@ class sendgiftnum extends handler
 	public function load($guid)
 	{
 		$db = new db_mysql();
-		$result = $db->db_query_select("select sendgiftnum form t_char where guid = $guid;");
+		$result = $db->db_query_select("select sendgiftnum from t_char where guid = $guid;");
 		if (is_null($result)) {
 			return -1;
 		}
