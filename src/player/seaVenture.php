@@ -38,7 +38,7 @@ class seaVenture extends handler
 
 		$ptr->insertRanklist($guid, $name, 0, $score);
 
-		return response::format(ERROR_OK);
+		return response::format(ERROR_OK, "do doVenture success");
 	}
 
 	//crontab execute hours check
@@ -58,21 +58,27 @@ class seaVenture extends handler
 	{
 		$json_friendlist = friend::getFriendlist($guid);
 		$arr_json_friendlist = json_decode($json_friendlist, true);
-		$arr_json_friendlist_result = $arr_json_friendlist['result'];
+		$arr_friendlist = $arr_json_friendlist['result'];
 
-		$arr_friendlist = json_decode($arr_json_friendlist_result, true);
 		//var_dump($arr_friendlist);
 		$db = new db_mysql();
 		$friendRanklist = array();
-		foreach ($arr_friendlist as $value) {
-			$friendid = intval($value['friendid']);
+
+		$arrLen = count($arr_friendlist);
+		for ($i=0; $i < $arrLen; $i++) { 
+
+			$friendRecord = &$arr_friendlist[$i];
+
+			$friendid = intval($friendRecord['guid']);
 			$result = $db->db_query_select("select shell from t_char where guid = $friendid");
 			if (is_null($result)) {
 				continue;
 			}
 			$row = $result->fetch_assoc();
 			$score = intval($row['shell']);
-			$friendRecord = array("rank"=>0, "friendid"=>$friendid, "score"=>$score);
+			$friendRecord['rank']  = 0;
+			$friendRecord['score'] = $score;
+			// /echo json_encode($friendRecord)."\n";
 			$friendRanklist[] = $friendRecord;
 		}
 

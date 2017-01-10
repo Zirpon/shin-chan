@@ -177,26 +177,25 @@ class chapter extends handler
 	{
 		$json_friendlist = friend::getFriendlist($guid);
 		$arr_json_friendlist = json_decode($json_friendlist, true);
-		$arr_json_friendlist_result = $arr_json_friendlist['result'];
+		$arr_friendlist = $arr_json_friendlist['result'];
 
-		$arr_friendlist = json_decode($arr_json_friendlist_result, true);
 		//echo json_encode($arr_friendlist);
 		$db = new db_mysql();
 		$friendRanklist = array();
-		foreach ($arr_friendlist as $value) {
-			$friendid = intval($value['friendid']);
+
+		$arrLen = count($arr_friendlist);
+		for ($i=0; $i < $arrLen; $i++) { 
+
+			$friendRecord = &$arr_friendlist[$i];
+
+			$friendid = intval($friendRecord['guid']);
 			$arrChapterResult = self::getChapterResult($friendid, $chapter);
 
 			$score = intval($arrChapterResult[1]);
-			$friendRecord = array("rank"=>0,"friendid"=>$friendid,"score"=>$score);
+			$friendRecord['rank']  = 0;
+			$friendRecord['score'] = $score;
+			// /echo json_encode($friendRecord)."\n";
 			$friendRanklist[] = $friendRecord;
-		}
-
-		$arrMyChapterResult = self::getChapterResult($guid, $chapter);
-		if (!is_null($arrMyChapterResult)) {
-			$score = intval($arrMyChapterResult[1]);
-			$myRecord = array("rank"=>0,"friendid"=>$guid,"score"=>$score);
-			$friendRanklist[] = $myRecord;
 		}
 
 		$friendRanklist = my_sort($friendRanklist, "score");
