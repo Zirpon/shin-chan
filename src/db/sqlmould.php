@@ -14,7 +14,7 @@
 	//friend
 	define("createfriend", "insert into t_friend (playerid, friendid, isvalid) values (?, ?, 1);");
 	define("makeupfriend", "update t_friend set isvalid = 1 where playerid = ? and friendid = ?;");
-	define("unfriend", "update t_friend set isvalid = 0 where playerid = ? and friendid = ?;");
+	define("unfriend", "update t_friend set isvalid = 0,giftcount= 0,msgcount = 0,requestGift = 0 where playerid = ? and friendid = ?;");
 	define("searchFriendById", "select gid,guid,name,logintime,mflag from t_char where guid = ");
 
 	// mail
