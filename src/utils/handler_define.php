@@ -28,7 +28,7 @@
 			2024	=> "requestGift",
 			2025	=> "sendMsg",
 			2026	=> "recommendFriends", // playerid
-			2027	=> "searchFriendById",//friendId
+			2027	=> "searchFriendById",//guid friendId
 			2028	=> "getFriendlist",//guid
 			2029	=> "friendinfo",//test
 		),

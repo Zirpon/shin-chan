@@ -264,12 +264,15 @@
 			return response::format(ERROR_OK, $ret);
 		}
 	
-		public function searchFriendById($friendid)
+		public function searchFriendById($guid, $friendid)
 		{
 			$db = new db_mysql();
-
+			
 			$friendinfo = account::charinfo($friendid);
 			if ($friendinfo != -1) {
+				$bIsFriend = self::isFriend($guid, $friendid);
+				$friendinfo['bIsfriend'] = $bIsFriend;
+
 				logger::write("searchFriendById success: ".print_r($friendinfo, true), __CLASS__);
 				return response::format(ERROR_OK, $friendinfo);	
 			}
