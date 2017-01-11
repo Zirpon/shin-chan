@@ -25,7 +25,7 @@ class elapsedTime
 		$this->end_time = ((float)$sec + (float)$msec);
 
 		$cost_time = $this->end_time - $this->start_time;
-		logger::write($this->mFunName." cost time ".$cost_time, __CLASS__);
+		logger::write($this->mFunName."\tcost time\t".$cost_time, __CLASS__);
 		//echo "hello world";
 	}
 

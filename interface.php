@@ -4,6 +4,7 @@
 	include dirname(__FILE__).'/src/log/logger.php';
 	include dirname(__FILE__).'/src/utils/handler_define.php';
 	include dirname(__FILE__).'/src/utils/error_code.php';
+	include dirname(__FILE__).'/src/utils/elapsedTime.php';
 
 	error_reporting(0);
 
@@ -33,6 +34,7 @@
 
 	$function = $GLOBALS["handlers"][$params["handler"]][$params["findex"]];
   	logger::write("handle func name : ".$function, "interface");
+	$timer = new elapsedTime($function);
 
 	$packet = array();
 	if (isset($data['json_data'])) {
