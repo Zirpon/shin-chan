@@ -4,6 +4,7 @@
 	require_once dirname(__FILE__).'/../player/sendgiftnum.php';
 
 	friend::cleanRequestGiftStatus();
+	friend::cleanSendGiftStatus();
 	gotgiftnum::clean();
 	sendgiftnum::clean();
 ?>
