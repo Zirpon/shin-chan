@@ -112,14 +112,10 @@ class chapter extends handler
 			$updateStar = ($star > intval($arrChapterResult[0]))? $star : $arrChapterResult[0];
 			$updatePoint = ($point > intval($arrChapterResult[1]))? $point : $arrChapterResult[1];
 			$firstFinishtime = ($point > intval($arrChapterResult[1]))? $firstFinishtime : $arrChapterResult[2];
-
-			chapterMgr::updateRanklist($guid, $chapter, $updateStar, $updatePoint, $firstFinishtime);
-		}
-		else
-		{
-			chapterMgr::insertRanklist($guid, $chapter, $updateStar, $updatePoint, $firstFinishtime);
 		}
 		
+		chapterMgr::updateRanklist($guid, $chapter, $updateStar, $updatePoint, $firstFinishtime);
+
 		$this->m_arrChapters[$chapter-1] = self::formatChapter($updateStar, $updatePoint, $firstFinishtime);	
 		
 		self::saveChapters($guid);
