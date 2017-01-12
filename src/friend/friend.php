@@ -179,6 +179,7 @@
 			$result = $db->db_query_select("update t_friend set giftcount = 1 where playerid = $playerid 
 											and friendid = $friendid;");
 			//var_dump($result);
+			sendgiftnum::update($playerid, 1);
 
 			return $result;
 	    }
@@ -186,7 +187,14 @@
 	    public function cleanRequestGiftStatus()
 	    {
 	    	$db = new db_mysql();
-	    	$result = $db->db_query_select("update t_friend set requestGift = 0");
+	    	$result = $db->db_query_select("update t_friend set requestGift = 0;");
+	    	return $result;
+	    }
+
+	    public function cleanSendGiftStatus()
+	    {
+	    	$db = new db_mysql();
+	    	$result = $db->db_query_select("update t_friend set giftcount = 0;");
 	    	return $result;
 	    }
 

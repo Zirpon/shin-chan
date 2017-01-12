@@ -56,7 +56,11 @@
 	        }
 
 	        if ($type == eMsgType_sendGift) {
-	        	friend::sendGiftMsg($senderid, $receiverid);
+	        	$flag =  $friend::sendGiftMsg($senderid, $receiverid);
+	        	if ($flag == -1) {
+	        		logger::error("newMsg error:".$senderid."|".$receiverid." send gift msg error", __CLASS__);
+	        		return response::format(-1, "send gift msg error");
+	        	}
 	        	$res['sendgiftnum'] = sendgiftnum::load($senderid);
 	        }
 
