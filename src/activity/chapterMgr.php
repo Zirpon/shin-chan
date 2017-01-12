@@ -91,7 +91,7 @@ class chapterMgr extends handler
 		$db = new db_mysql();
 
 		$tableName = self::getRanklistTableName($chapter);
-
+		//echo $tableName;
 		$result = $db->db_query_select("select name,sex from t_char where guid = $guid;");
 		
 		if ($result->num_rows < 1 ) {
@@ -109,14 +109,31 @@ class chapterMgr extends handler
 		$result = $db->db_query_select($sql);
 	}
 
+	public function haveRecord($guid, $chapter)
+	{
+		$db = new db_mysql();
+		$tableName = self::getRanklistTableName($chapter);
+
+		$result = $db->db_query_select("select count(*) from $tableName where guid = $guid");
+		$row = $result->fetch_assoc();
+		$haveRecord = $row['count(*)'];
+
+		return $haveRecord;
+	}
+
 	public function updateRanklist($guid, $chapter, $star, $point, $achieveTime)
 	{
 		$db = new db_mysql();
-
 		$tableName = self::getRanklistTableName($chapter);
 
-		$sql = "update $tableName set star = $star, score = $point, achieveTime = $achieveTime where guid = $guid;";
+		$haveRecord = self::haveRecord($guid, $chapter);
+		if ($haveRecord <= 0) {
+			self::insertRanklist($guid, $chapter, $star, $point, $achieveTime);
+			return;	
+		}
 
+		$sql = "update $tableName set star = $star, score = $point, achieveTime = $achieveTime where guid = $guid;";
+		//echo $sql;
 		$result = $db->db_query_select($sql);
 	}
 
