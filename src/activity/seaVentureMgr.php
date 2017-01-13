@@ -141,6 +141,7 @@ class seaVentureMgr extends handler
 		return $result;
 	}
 
+	//set default seaventure begin end time
 	public function isOpened()
 	{
 		$config = $GLOBALS['g_arrSeaVentureMgrConfig'];
@@ -203,6 +204,7 @@ class seaVentureMgr extends handler
 		//var_dump($result);
 		if ($result->num_rows == 1) {
 			//this period seaventure already record;
+			logger::write("recordRanklist:$recordTableName this period seaventure already record;", __CLASS__);
 			return false;
 		}
 
@@ -225,7 +227,7 @@ class seaVentureMgr extends handler
 			logger::write("recordRanklist:".$szRecord, __CLASS__);
 		}
 
-		//return true;
+		return true;
 	}
 
 	//crontab execute Sun 23:50 check

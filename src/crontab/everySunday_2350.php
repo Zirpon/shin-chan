@@ -6,4 +6,5 @@
 	seaVentureMgr::cleanRanklist();
 	message::cleanMsg();
 
+	logger::write("crontab run ".__FILE__."", "crontab");
 ?>

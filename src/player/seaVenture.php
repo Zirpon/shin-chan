@@ -44,6 +44,7 @@ class seaVenture extends handler
 	//crontab execute hours check
 	public function cleanVenture()
 	{
+		//debug set false condition
 		if (true == seaVentureMgr::isOpened()) {
 			return false;	
 		}

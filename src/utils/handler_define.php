@@ -42,7 +42,7 @@
 
 		"chapter"	=> array(
 			2041	=> "loadChapters",//guid
-			2042	=> "updateChapter",//$guid, $chapter, $star, $point, $firstFinishtime  
+			2042	=> "updateChapter",//$guid, $chapter, $star, $point  
 			2043	=> "getfriendRanklist",//$guid, $chapter  
 		),
 

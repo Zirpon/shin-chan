@@ -34,7 +34,7 @@
 
 	$function = $GLOBALS["handlers"][$params["handler"]][$params["findex"]];
   	logger::write("handle func name : ".$function, "interface");
-	$timer = new elapsedTime($function);
+	$timer = new elapsedTime($function."_".$params["findex"]);
 
 	$packet = array();
 	if (isset($data['json_data'])) {
@@ -97,6 +97,7 @@
 
 	$result = $handler->process($function, $packet);
 	//var_dump(error_get_last());
+  	logger::debug("request success: ".$result, "interface");
 
 	echo $result."\n";
 

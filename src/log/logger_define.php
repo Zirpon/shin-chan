@@ -14,6 +14,7 @@ $LOGGER_TYPE = array
 	"seaVentureMgr"	=> LOGGERPATH."seaVentureMgr_".date("Y-m-d").".log",
 	"db_mysql"		=> LOGGERPATH."db_mysql_".date("Y-m-d").".log",
 	"php_error"		=> LOGGERPATH."php_error_".date("Y-m-d").".log",
+	"crontab"		=> LOGGERPATH."crontab_".date("Y-m-d").".log",
 );
 
 $LOGGER_SWITCH = TRUE;

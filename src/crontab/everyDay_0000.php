@@ -7,4 +7,6 @@
 	friend::cleanSendGiftStatus();
 	gotgiftnum::clean();
 	sendgiftnum::clean();
+
+	logger::write("crontab run ".__FILE__."", "crontab");
 ?>
