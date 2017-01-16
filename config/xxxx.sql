@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `t_account`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_account` (
   `gid` int(11) NOT NULL AUTO_INCREMENT,
-  `accname` varchar(50) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
-  `passwd` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `accname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `passwd` varchar(50) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
   `guid` int(11) NOT NULL,
   `createtime` int(11) NOT NULL,
   `frozentime` int(11) DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '2',
   `gmlogin` tinyint(2) NOT NULL DEFAULT '0',
-  `nickname` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `nickname` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
   `loginkey` int(11) DEFAULT '0',
   PRIMARY KEY (`gid`),
   KEY `Index_accname` (`accname`),
@@ -1863,6 +1863,1806 @@ CREATE TABLE `t_chapterRanklist_Level100` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `t_chapterRanklist_Level101`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level101`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level101` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level102`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level102`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level102` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level103`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level103`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level103` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level104`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level104`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level104` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level105`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level105`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level105` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level106`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level106`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level106` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level107`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level107`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level107` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level108`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level108`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level108` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level109`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level109`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level109` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level110`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level110`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level110` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level111`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level111`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level111` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level112`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level112`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level112` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level113`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level113`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level113` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level114`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level114`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level114` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level115`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level115`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level115` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level116`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level116`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level116` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level117`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level117`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level117` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level118`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level118`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level118` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level119`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level119`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level119` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level120`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level120`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level120` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level121`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level121`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level121` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level122`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level122`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level122` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level123`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level123`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level123` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level124`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level124`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level124` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level125`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level125`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level125` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level126`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level126`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level126` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level127`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level127`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level127` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level128`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level128`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level128` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level129`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level129`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level129` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level130`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level130`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level130` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level131`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level131`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level131` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level132`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level132`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level132` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level133`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level133`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level133` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level134`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level134`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level134` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level135`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level135`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level135` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level136`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level136`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level136` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level137`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level137`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level137` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level138`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level138`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level138` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level139`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level139`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level139` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level140`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level140`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level140` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level141`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level141`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level141` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level142`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level142`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level142` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level143`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level143`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level143` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level144`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level144`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level144` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level145`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level145`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level145` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level146`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level146`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level146` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level147`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level147`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level147` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level148`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level148`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level148` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level149`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level149`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level149` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level150`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level150`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level150` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level151`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level151`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level151` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level152`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level152`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level152` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level153`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level153`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level153` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level154`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level154`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level154` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level155`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level155`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level155` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level156`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level156`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level156` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level157`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level157`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level157` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level158`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level158`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level158` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level159`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level159`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level159` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level160`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level160`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level160` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level161`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level161`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level161` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level162`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level162`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level162` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level163`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level163`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level163` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level164`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level164`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level164` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level165`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level165`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level165` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level166`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level166`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level166` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level167`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level167`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level167` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level168`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level168`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level168` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level169`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level169`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level169` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level170`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level170`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level170` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level171`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level171`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level171` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level172`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level172`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level172` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level173`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level173`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level173` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level174`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level174`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level174` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level175`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level175`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level175` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level176`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level176`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level176` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level177`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level177`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level177` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level178`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level178`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level178` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level179`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level179`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level179` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level180`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level180`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level180` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level181`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level181`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level181` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level182`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level182`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level182` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level183`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level183`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level183` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level184`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level184`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level184` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level185`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level185`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level185` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level186`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level186`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level186` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level187`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level187`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level187` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level188`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level188`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level188` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level189`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level189`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level189` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level190`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level190`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level190` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level191`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level191`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level191` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level192`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level192`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level192` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level193`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level193`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level193` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level194`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level194`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level194` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level195`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level195`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level195` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level196`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level196`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level196` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level197`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level197`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level197` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level198`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level198`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level198` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level199`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level199`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level199` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_chapterRanklist_Level200`
+--
+
+DROP TABLE IF EXISTS `t_chapterRanklist_Level200`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_chapterRanklist_Level200` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `achieveTime` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `t_char`
 --
 
@@ -1918,7 +3718,7 @@ CREATE TABLE `t_friend` (
   `requestGift` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `playerid` (`playerid`,`friendid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1965,7 +3765,7 @@ CREATE TABLE `t_msgqueue` (
   `createtime` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `playerid` (`senderid`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1995,6 +3795,22 @@ DROP TABLE IF EXISTS `t_seaventure_rank_2016_12_26`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_seaventure_rank_2016_12_26` (
+  `rank` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `score` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_seaventure_rank_2017_01_09`
+--
+
+DROP TABLE IF EXISTS `t_seaventure_rank_2017_01_09`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_seaventure_rank_2017_01_09` (
   `rank` int(11) NOT NULL,
   `guid` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -2274,7 +4090,7 @@ BEGIN
 	declare result int default -1;
 	
 	#搜索3个人
-	declare cnt int default 3;
+	declare cnt int default 10;
 		
 	#一个月内登录过
 	declare timeinterval int default 2592000;
@@ -2491,4 +4307,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-06 18:34:59
+-- Dump completed on 2017-01-16 14:47:43
