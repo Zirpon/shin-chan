@@ -247,7 +247,7 @@
 		{
 			$current = time();
 			$db = new db_mysql();
-			$sql = "select * from t_msgqueue where senderid = $senderid and friendid = $receiverid and type = 1 and isvalid = 1;";
+			$sql = "select * from t_msgqueue where senderid = $senderid and receiverid = $receiverid and type = 1 and isvalid = 1;";
 			//echo $sql;
 			$result = $db->db_query_select($sql);
 			//var_dump($result);
