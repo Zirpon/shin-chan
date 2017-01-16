@@ -4,6 +4,7 @@
 	require_once dirname(__FILE__).'/src/log/logger.php';
 	require_once dirname(__FILE__).'/src/message/message.php';
 	require_once dirname(__FILE__).'/src/friend/friend.php';
+	require_once dirname(__FILE__).'/src/activity/chapterMgr.php';
 /*
 	$db = new db_mysql();
 	$param = array("aaaaa");
@@ -14,5 +15,5 @@
 	$row = $result->fetch_assoc();
 	var_dump($row);
 */	
-	echo friend::isFriend(1000000004, 1000000005);
+	echo chapterMgr::db_init();
 ?>
