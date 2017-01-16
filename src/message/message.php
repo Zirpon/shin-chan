@@ -14,8 +14,15 @@
 		{	
 			if ( !account::bExistsChar($senderid) || !account::bExistsChar($receiverid) 
 				|| $type > eMsgType_end ) {
-	   				logger::error("newMsg error: $senderid $receiverid $type error", __CLASS__);
+	   			logger::error("newMsg error: $senderid $receiverid $type error", __CLASS__);
 				return response::format(ERROR_PARAMS, "$senderid $receiverid $type error");
+			}
+
+			if ($type == eMsgType_addFriend) {
+				if (true == self::bIsSendNewFriendMsg($senderid, $receiverid)) {
+	   				logger::error("newMsg error: $senderid $receiverid $type already send new friend msg", __CLASS__);
+					return response::format(ERROR_PARAMS, "$senderid $receiverid $type already send new friend msg");
+				}
 			}
 
 	        if ($type == eMsgType_requestGift) {
@@ -227,12 +234,37 @@
 			}
 			
 			self::readMsg($msgid);
+			
 			return response::format($errCode, $res);
 		}
 
 		public function getTimestamp()
 		{
 			return response::format(ERROR_OK, time());
+		}
+
+		public function bIsSendNewFriendMsg($senderid, $receiverid)
+		{
+			$current = time();
+			$db = new db_mysql();
+			$sql = "select * from t_msgqueue where senderid = $senderid and friendid = $receiverid and type = 1 and isvalid = 1;";
+			//echo $sql;
+			$result = $db->db_query_select($sql);
+			//var_dump($result);
+
+			if (isset($result) && $result->num_rows > 0) {
+				//$row = $result->fetch_assoc();
+				return true;
+			}
+
+			return false;
+		}
+
+		public function removeMsg($msgid)
+		{
+			$db = new db_mysql();
+			$result = $db->db_query_select("delete from t_msgqueue where id = $msgid;");
+			//var_dump($result);
 		}
 
 		//clean msg func set isvalid = 0
