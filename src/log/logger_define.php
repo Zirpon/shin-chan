@@ -17,6 +17,10 @@ $LOGGER_TYPE = array
 	"crontab"		=> LOGGERPATH."crontab_".date("Y-m-d").".log",
 );
 
+$LOGGER_MAIL_RECEIVER = array(
+	"735037139@qq.com",
+);
+
 $LOGGER_SWITCH = TRUE;
 $LOGGER_DEBUG_SWITCH = TRUE;
 

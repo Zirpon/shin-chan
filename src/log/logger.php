@@ -48,6 +48,15 @@ Class logger
 		{
 			error_log(date("Y-m-d H:i:s ")."[error] ".$log_str."\n", 3, $loggerType[$log_type] );
 		}
+        
+        //php运行时错误 发送邮件通知给开发者
+		if ($log_type == "php_error") {
+
+			foreach ($GLOBALS['LOGGER_MAIL_RECEIVER'] as $value) {
+				error_log("handleFatalPhpError:".$log_str, 1, $value);
+			}
+		}
+
 	}
 }
 
