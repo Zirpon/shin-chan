@@ -1,6 +1,22 @@
 <?php
 require_once dirname(__FILE__)."/logger_define.php";
 
+function get_server_ip() { 
+    if (isset($_SERVER)) { 
+        if($_SERVER['SERVER_ADDR']) {
+            $server_ip = $_SERVER['SERVER_ADDR']; 
+        } else { 
+            $server_ip = $_SERVER['LOCAL_ADDR']; 
+        } 
+    } else { 
+        $server_ip = getenv('SERVER_ADDR');
+    }
+
+    $server_ip = "IP: ".$server_ip." HOSTNAME: ".gethostbyname($_SERVER['HOSTNAME'])." clientIP: ".$_SERVER['REMOTE_ADDR'];
+
+    return $server_ip; 
+}
+
 Class logger
 {
 	//define("taobao", LOGGERPATH."taobao_debug.log");
@@ -53,7 +69,7 @@ Class logger
 		if ($log_type == "php_error") {
 
 			foreach ($GLOBALS['LOGGER_MAIL_RECEIVER'] as $value) {
-				error_log("handleFatalPhpError:".$log_str, 1, $value);
+				error_log(get_server_ip()."\n"."handleFatalPhpError:".$log_str, 1, $value);
 			}
 		}
 

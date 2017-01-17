@@ -34,7 +34,20 @@ $message = "This is a test mail!";//邮件正文
 mail($to,$subject,$message);  
 error_log("读发送打",1,"735037139@qq.com");
 */
+	error_reporting(0);
+
+	register_shutdown_function('handleFatalPhpError');
+
+	function handleFatalPhpError() {
+		$last_error = error_get_last();
+
+		if($last_error['type'] === E_ERROR) {
+			logger::error("handleFatalPhpError:".print_r($last_error, true), "php_error");
+			echo response::format(ERROR_PARAMS, "php fatal error")."\n";
+		}
+	}
+
+	test();
 	echo "hello world";
-	logger::error("handleFatalPhpError:"."congra you got error", "php_error");
 
 ?>
