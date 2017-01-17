@@ -276,8 +276,13 @@
 		{
 			$db = new db_mysql();
 			
-			$friendinfo = account::charinfo($friendid);
-			if ($friendinfo != -1) {
+			$json_friendinfo = account::charinfo($friendid);
+
+			$resutl_friendinfo = json_decode($json_friendinfo, true);
+			$errCode = $resutl_friendinfo['errCode'];
+			$friendinfo = $resutl_friendinfo['result'];
+
+			if ($errCode != -1) {
 				$bIsFriend = self::isFriend($guid, $friendid);
 				$friendinfo['bIsfriend'] = $bIsFriend;
 
@@ -305,13 +310,27 @@
 
 				$friendid = $rows['friendid'];
 
-				$friendRecord = account::charinfo($friendid);
+				//$friendRecord = account::charinfo($friendid);
+				$json_friendinfo = account::charinfo($friendid);
+
+				$resutl_friendinfo = json_decode($json_friendinfo, true);
+				$errCode = $resutl_friendinfo['errCode'];
+				$friendRecord = $resutl_friendinfo['result'];
+
 				$friendRecord['isRequestGift']	= self::isRequestGift($guid, $friendid);
 				$friendRecord['isSendGift']	   	= self::bIsSendGiftOver($guid, $friendid);
 				$friendlist[] = $friendRecord;
 			}
-			$myRecord = array();
-			$myRecord = account::charinfo($guid);
+			
+			//$myRecord = array();
+			//$myRecord = account::charinfo($guid);
+
+			$json_myinfo = account::charinfo($guid);
+
+			$resutl_myinfo = json_decode($json_myinfo, true);
+			$errCode = $resutl_myinfo['errCode'];
+			$myRecord = $resutl_myinfo['result'];
+
 			$friendlist[] = $myRecord;
 
 			$friendlist = my_sort($friendlist, "totalStar", "maxChapter");

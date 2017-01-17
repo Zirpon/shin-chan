@@ -105,7 +105,14 @@
 			for ($i=0; $i < $listLen; $i++) { 
 				$msg = &$msgList[$i];
 				$senderid = $msg['senderid'];
-				$senderinfo = account::charinfo($senderid);
+				//$senderinfo = account::charinfo($senderid);
+
+				$json_senderinfo = account::charinfo($senderid);
+
+				$resutl_senderinfo = json_decode($json_senderinfo, true);
+				$errCode = $resutl_senderinfo['errCode'];
+				$senderinfo = $resutl_senderinfo['result'];
+
 				$senderinfo['isRequestGift'] = friend::isRequestGift($guid, $senderid);
 				$msg['senderinfo'] = $senderinfo;
 

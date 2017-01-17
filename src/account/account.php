@@ -234,19 +234,22 @@
 			$db = new db_mysql();
 
 			$charinfo = array();
-			$result = $db->db_query_select("select name,sex,logintime from t_char where guid = $charguid;");
+			$result = $db->db_query_select("select name,sex,logintime,sendgiftnum,gotgiftnum from t_char where guid = $charguid;");
 			//var_dump($result);
 			if ($result->num_rows <= 0) {
-				return -1;
+				return response::format(ERROR_MYSQL);
 			}
 			$record_row = $result->fetch_assoc();
 			$charinfo['guid']		= $charguid;
 			$charinfo['name'] 		= $record_row['name'];
 			$charinfo['sex'] 		= $record_row['sex'];
 			$charinfo['logintime'] 	= $record_row['logintime'];
+			$charinfo['sendgiftnum'] 	= $record_row['sendgiftnum'];
+			$charinfo['gotgiftnum'] 	= $record_row['gotgiftnum'];
 			$charinfo['maxChapter']	= chapter::getMaxChapterLevel($charguid);
 			$charinfo['totalStar'] 	= chapter::getTotalStar($charguid);
-			return $charinfo;
+
+			return response::format(ERROR_OK, $charinfo);
 		}
 	}
 

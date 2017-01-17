@@ -5,7 +5,7 @@
 			2002	=> "checkAccount",//$account, $pwd, $type
 			2003	=> "newChar",//$account, $type, $charname
 			2004	=> "login",//$account, $type
-			//2005	=> "bExistsChar",//$guid 
+			2005	=> "charinfo",//$guid 
 			//2006	=> "sGetCharname",//$guid 
 			2007	=> "guestLogin",//$account, $type, $charname
 			2008	=> "archive",//$guid, $data
@@ -30,7 +30,6 @@
 			2026	=> "recommendFriends", // playerid
 			2027	=> "searchFriendById",//guid friendId
 			2028	=> "getFriendlist",//guid
-			2029	=> "friendinfo",//test
 		),
 
 		"mail"		=> array(
