@@ -3685,7 +3685,7 @@ CREATE TABLE `t_char` (
   `createtime` int(11) NOT NULL,
   `isvalid` smallint(6) NOT NULL,
   `mdata` text CHARACTER SET latin1 NOT NULL,
-  `mflag` text CHARACTER SET latin1 NOT NULL,
+  `mflag` text NOT NULL,
   `shell` int(11) NOT NULL,
   `firstlogin` int(11) NOT NULL DEFAULT '0',
   `sendgiftnum` int(11) NOT NULL,
@@ -3765,7 +3765,7 @@ CREATE TABLE `t_msgqueue` (
   `createtime` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `playerid` (`senderid`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4117,7 +4117,8 @@ CREATE TEMPORARY TABLE `t_recomfriends` (
 	#select "max gid is " + @maxgid;
 	#一秒内刷新的推荐好友列表会一样
 	set @rankseed = timeinterval;
-	# 调试 set @times = 10;
+  #	调试 
+  set @times = 30;
 
 	REPEAT
 		set @rankseed = @rankseed + 1;
@@ -4155,7 +4156,8 @@ CREATE TEMPORARY TABLE `t_recomfriends` (
 			END IF;
 
 		END IF;
-	#调试 set @times = @times - 1;
+	#调试 
+		set @times = @times - 1;
 
 	UNTIL cnt <= 0 or @times <= 0 END REPEAT;
 
@@ -4307,4 +4309,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-16 14:47:43
+-- Dump completed on 2017-01-17 11:34:18

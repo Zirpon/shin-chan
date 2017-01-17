@@ -30,7 +30,7 @@ class chapter extends handler
 			$sChapters = $row["mflag"];
 			//echo "\nddd".$sChapters."ddd\n";
 			if (!empty($sChapters)) {
-				self::getChapters($sChapters);
+				self::initChapterRecord($sChapters);
 				return 1;
 			}
 			return 0;
@@ -50,7 +50,7 @@ class chapter extends handler
 			return response::format(ERROR_MYSQL, "db sql error");
 		}
 
-		$strChapter = self::formatChapters();
+		$strChapter = self::patchChapterRecord();
         //var_dump($stmt);
         $stmt->bind_param($GLOBALS['sqlmould']["saveChapters"], $strChapter, $guid);
         $stmt->execute();
@@ -60,23 +60,51 @@ class chapter extends handler
 
 		return response::format(ERROR_OK, "send msg ok");
 	}
-
-	public function formatChapters()
+	
+	public function patchChapterRecord()
 	{
-		return implode("|", $this->m_arrChapters);
+		$arrPatch = array();
+
+		$len = count($this->m_arrChapters);
+		//var_dump($this->m_arrChapters);
+
+		foreach ($this->m_arrChapters as $key => $value) {
+
+			$strRecord = self::formatChapterRecord($key, $value["star"], $value['point'], $value['firstFinishtime']);
+
+			$arrPatch[] = $strRecord;	
+		}
+
+		return implode("|", $arrPatch);
 	}
 
-	public function getChapters( $str )
+	public function initChapterRecord( $str )
 	{
-		$this->m_arrChapters = explode("|", $str);
+		$arrStrChapter = explode("|", $str);
+		$arrLen = count($arrStrChapter);
+		for ($i=0; $i < $arrLen; $i++) {
+			$strChapterRecord = $arrStrChapter[$i];
+			$arrChapterRecord = self::parseChapterRecord($strChapterRecord);
+
+			$index = intval($arrChapterRecord[0]);
+			$star = intval($arrChapterRecord[1]);
+			$point = intval($arrChapterRecord[2]);
+			$firstFinishtime = intval($arrChapterRecord[3]);
+
+			$this->m_arrChapters[$index] = array(
+				"star"				=> $star,
+				"point" 			=> $point,
+				"firstFinishtime"	=> $firstFinishtime,
+				);
+		}
 	}
 
-	public function formatChapter($star, $point, $firstFinishtime)
+	public function formatChapterRecord($chapter, $star, $point, $firstFinishtime)
 	{
-		return $star."-".$point."-".$firstFinishtime;
+		return $chapter."-".$star."-".$point."-".$firstFinishtime;
 	}
 
-	public function formatChapterResult( $str )
+	public function parseChapterRecord( $str )
 	{
 		$result = explode("-", $str);
 		//var_dump($result);
@@ -95,29 +123,30 @@ class chapter extends handler
 			return response::format(ERROR_PARAMS, "guid error:$guid");
 		}
 
-		$maxFinishChapter = count($this->m_arrChapters);
-
-		if ( ($maxFinishChapter+1) < $chapter ) {
-			return response::format(ERROR_PARAMS, "chapter error:chapter $chapter > maxFinishChapter $maxFinishChapter");
-		}
-
 		$updateStar = $star;
 		$updatePoint = $point;
 		$firstFinishtime = time();
-		if (isset($this->m_arrChapters[$chapter-1])) {
+		if (isset($this->m_arrChapters[$chapter])) {
 
-			$szChapterResult = $this->m_arrChapters[$chapter-1];
+			$arrChapterResult = $this->m_arrChapters[$chapter];
 
-			$arrChapterResult = self::formatChapterResult($szChapterResult);
-			$updateStar = ($star > intval($arrChapterResult[0]))? $star : $arrChapterResult[0];
-			$updatePoint = ($point > intval($arrChapterResult[1]))? $point : $arrChapterResult[1];
-			$firstFinishtime = ($point > intval($arrChapterResult[1]))? $firstFinishtime : $arrChapterResult[2];
+			$updateStar = ($star > $arrChapterResult["star"])? 
+								$star : $arrChapterResult["star"];
+
+			$updatePoint = ($point > $arrChapterResult["point"])? 
+								$point : $arrChapterResult["point"];
+
+			$firstFinishtime = ($point > $arrChapterResult["point"])? 
+								$firstFinishtime : $arrChapterResult["firstFinishtime"];
 		}
 		
 		chapterMgr::updateRanklist($guid, $chapter, $updateStar, $updatePoint, $firstFinishtime);
 
-		$this->m_arrChapters[$chapter-1] = self::formatChapter($updateStar, $updatePoint, $firstFinishtime);	
-		
+		$this->m_arrChapters[$chapter] = array(
+				"star"				=> $updateStar,
+				"point" 			=> $updatePoint,
+				"firstFinishtime"	=> $firstFinishtime,
+				);
 		self::saveChapters($guid);
 
 		return response::format(ERROR_OK, "chapter update ok");
@@ -127,12 +156,13 @@ class chapter extends handler
 	{
 		self::loadChapters($guid);
 		//var_dump($this->m_arrChapters);
-
-		if ( count($this->m_arrChapters) == 1 && empty($this->m_arrChapters[0]) ){
-			return 0;
+		$maxLevel = 0;
+		$len = count($this->m_arrChapters);
+		foreach ($this->m_arrChapters as $key => $value) {
+			$maxLevel = ($maxLevel > $key) ? $maxLevel : $key;
 		}
 
-		return count($this->m_arrChapters);
+		return $maxLevel;
 	}
 
 	public function getTotalStar($guid)
@@ -141,8 +171,7 @@ class chapter extends handler
 
 		$totalStar = 0;
 		foreach ($this->m_arrChapters as $value) {
-			$arrChapterResult = self::formatChapterResult($value);
-			$totalStar += $arrChapterResult[0];
+			$totalStar += $value["star"];
 		}
 
 		return $totalStar;
@@ -156,16 +185,13 @@ class chapter extends handler
 
 		self::loadChapters($guid);
 
-		if (isset($this->m_arrChapters[$chapter-1])) {
+		if (isset($this->m_arrChapters[$chapter])) {
 
-			$szChapterResult = $this->m_arrChapters[$chapter-1];
-
-			$arrChapterResult = self::formatChapterResult($szChapterResult);
+			$arrChapterResult = $this->m_arrChapters[$chapter];
 			return $arrChapterResult;
 		}
 
 		return NULL;
-
 	}
 
 	//every chapter point 
@@ -187,7 +213,7 @@ class chapter extends handler
 			$friendid = intval($friendRecord['guid']);
 			$arrChapterResult = self::getChapterResult($friendid, $chapter);
 
-			$score = intval($arrChapterResult[1]);
+			$score = intval($arrChapterResult["point"]);
 			$friendRecord['rank']  = 0;
 			$friendRecord['score'] = $score;
 			// /echo json_encode($friendRecord)."\n";

@@ -319,26 +319,6 @@
 			return response::format(ERROR_OK, $friendlist);
 		}
 
-		/*
-		public function friendinfo($friendid)
-		{
-			$db = new db_mysql();
-
-			$friendinfo = array();
-			$result = $db->db_query_select("select name,logintime from t_char where guid = $friendid;");
-			//var_dump($result);
-			if ($result->num_rows <= 0) {
-				return -1;
-			}
-			$record_row = $result->fetch_assoc();
-			$friendinfo['friendid']		= $friendid;
-			$friendinfo['name'] 		= $record_row['name'];
-			$friendinfo['logintime'] 	= $record_row['logintime'];
-			$friendinfo['maxChapter']	= chapter::getMaxChapterLevel($friendid);
-			$friendinfo['totalStar'] 	= chapter::getTotalStar($friendid);
-			return $friendinfo;
-		}*/
-
 		public function sendMsg($senderid, $receiverid, $type, $content = "", $deadline = iMsgTimeOut_1day)
 		{
 			$result = message::newMsg($senderid, $receiverid, $type, $content, $deadline);
