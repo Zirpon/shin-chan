@@ -69,7 +69,7 @@ Class logger
 		if ($log_type == "php_error") {
 
 			foreach ($GLOBALS['LOGGER_MAIL_RECEIVER'] as $value) {
-				error_log(get_server_ip()."\n"."handleFatalPhpError:".$log_str, 1, $value);
+				error_log(get_server_ip()."\n"."蜡笔小新PHP后台运行时错误"."\n"."handleFatalPhpError:".$log_str, 1, $value);
 			}
 		}
 
