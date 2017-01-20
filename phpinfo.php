@@ -47,7 +47,14 @@ error_log("读发送打",1,"735037139@qq.com");
 		}
 	}
 
-	test();
-	echo "hello world";
+//	test();
+	//echo "hello world";
 
+    $redis = new redis();
+ 
+    $redis->connect('127.0.0.1');//连接
+ 
+    $ret = $redis->set('name', '123'); //设置值
+ 
+    echo $redis->get('name'); //取值
 ?>
