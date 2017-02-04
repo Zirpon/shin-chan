@@ -80,7 +80,9 @@ class seaVenture extends handler
 			$friendRecord['rank']  = 0;
 			$friendRecord['score'] = $score;
 			// /echo json_encode($friendRecord)."\n";
-			$friendRanklist[] = $friendRecord;
+			if ( 0 < $score ) {
+				$friendRanklist[] = $friendRecord;
+			}
 		}
 
 		$friendRanklist = my_sort($friendRanklist, "score");

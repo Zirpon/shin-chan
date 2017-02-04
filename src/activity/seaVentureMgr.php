@@ -38,7 +38,10 @@ class seaVentureMgr extends handler
 			while ( $row = $result->fetch_assoc() ) {
 				$row["score"] = intval($row["score"]);
 				$row["rank"] = intval($row["rank"]);
-				$ranklist[] = $row;
+				
+				if ( 0 < $row["score"]) {
+					$ranklist[] = $row;
+				}
 			}
 
 			self::$m_arrRanklist = $ranklist;
