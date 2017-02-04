@@ -19,6 +19,7 @@ $LOGGER_TYPE = array
 
 $LOGGER_MAIL_RECEIVER = array(
 	"735037139@qq.com",
+	"zhangzhipeng@dayugame.net",
 	"chengbowei@dayugame.net",
 	"liangzhiyong@dayugame.net",
 );
