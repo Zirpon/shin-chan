@@ -156,7 +156,7 @@ class chapterMgr extends handler
 
 		while ($rows = $result->fetch_assoc()) {
 			//echo json_encode($rows)."\n";
-			if ( 0 < $row["score"] ) {
+			if ( 0 < $rows["score"] ) {
 				$ranklist[] = $rows;
 			}
 		}
