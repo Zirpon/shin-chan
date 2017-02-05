@@ -36,7 +36,7 @@ CREATE TABLE `t_account` (
   PRIMARY KEY (`gid`),
   KEY `Index_accname` (`accname`),
   KEY `Index_accnameandtype` (`accname`,`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3696,7 +3696,7 @@ CREATE TABLE `t_char` (
   UNIQUE KEY `Index_guid` (`guid`),
   UNIQUE KEY `Index_name` (`name`) USING HASH,
   KEY `Index_accname` (`accname`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3718,7 +3718,7 @@ CREATE TABLE `t_friend` (
   `requestGift` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `playerid` (`playerid`,`friendid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3743,7 +3743,7 @@ CREATE TABLE `t_mail` (
   `status` int(11) NOT NULL COMMENT '是否已读',
   PRIMARY KEY (`id`),
   KEY `mail_target_id` (`targetId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3765,7 +3765,7 @@ CREATE TABLE `t_msgqueue` (
   `createtime` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `playerid` (`senderid`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

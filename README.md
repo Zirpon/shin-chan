@@ -20,3 +20,22 @@ mac_虚拟机_CentOS6.5|4*i(Intel i7-4870HQ 2.5GHZ)| 1.8G | 12200 | 1min | 1100 
 php nginx 错误记录路径:
 /var/log/nginx/
 /var/log/php-fpm/
+---
+部署：
+1. 修改/etc/sysconfig/network
+2. git clone 项目 到 /data/ 路径
+3. 配置nginx.conf
+4. 配置nginx的负载均衡default.conf shinchan.conf
+5. 配置sendmail
+6. 配置php.ini
+7. 有些机器nginx.conf的server配置包include enable-php.conf;负载均衡的server去掉这个才能生效
+```
+  1         location ~ [^/]\.php(/|$)
+  2         {
+  3             try_files $uri =404;
+  4             fastcgi_pass  unix:/tmp/php-cgi.sock;
+  5             fastcgi_index index.php;
+  6             include fastcgi.conf;
+  7         }
+```
+8. 用whereis定位php路径 看清楚 php log 日志路径记在哪里`
