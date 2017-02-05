@@ -20,8 +20,10 @@ mac_虚拟机_CentOS6.5|4*i(Intel i7-4870HQ 2.5GHZ)| 1.8G | 12200 | 1min | 1100 
 php nginx 错误记录路径:
 /var/log/nginx/
 /var/log/php-fpm/
+
 ---
 部署：
+>
 1. 修改/etc/sysconfig/network
 2. git clone 项目 到 /data/ 路径
 3. 配置nginx.conf
@@ -43,3 +45,5 @@ php nginx 错误记录路径:
 10. 配置php.ini sendmail 的设置
 11. 配置/etc/hosts
 12. php显示超时要看 是不是sendmail的配置没有配置好 那个/etc/hosts没有配置好就会出现超时
+13. 服务器数据库备份脚本
+14. 始终没有搞懂为什么hostname怎么改才在邮件生效
