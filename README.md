@@ -3,6 +3,15 @@
 ### 这是蜡笔小新项目的后台
 ---
 ### 压测环境
+```
+webbench -c 并发数 -t 运行测试时间 URL
+webbench -c 5000 -t 120 "http://127.0.0.1/interface.php?handler=message&findex=2016"
+
+ab -n 800 -c 100  "http://127.0.0.1/interface.php?handler=message&findex=2016"    # 总共800个请求，100路并发
+ab -t 60 -c 100   "http://127.0.0.1/interface.php?handler=message&findex=2016"    # 总共运行60秒，100路并发
+
+```
+
 机器名子 | cpu | mem | 并发数 | 测试时间 |吞吐率(request/second) | 并发请求平均耗时(ms)| 
 --- | --- |--- | --- | --- | --- | ---
 mac_虚拟机_CentOS6.5|4*i(Intel i7-4870HQ 2.5GHZ)| 1.8G | 12200 | 1min | 1100 | 0.962
