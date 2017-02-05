@@ -16,3 +16,7 @@ mac_虚拟机_CentOS6.5|4*i(Intel i7-4870HQ 2.5GHZ)| 1.8G | 12200 | 1min | 1100 
         怀疑时php.ini 问题，  
         php.ini 可以配置记录发邮件的log 具体看测试服 或者 本地服 配置文件
 ```
+---
+php nginx 错误记录路径:
+/var/log/nginx/
+/var/log/php-fpm/

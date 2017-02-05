@@ -49,7 +49,7 @@ error_log("读发送打",1,"735037139@qq.com");
 
 //	test();
 	//echo "hello world";
-
+    phpinfo();
     $redis = new redis();
  
     $redis->connect('127.0.0.1');//连接
