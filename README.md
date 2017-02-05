@@ -39,3 +39,7 @@ php nginx 错误记录路径:
   7         }
 ```
 8. 用whereis定位php路径 看清楚 php log 日志路径记在哪里`
+9. 导入数据库表
+10. 配置php.ini sendmail 的设置
+11. 配置/etc/hosts
+12. php显示超时要看 是不是sendmail的配置没有配置好 那个/etc/hosts没有配置好就会出现超时
