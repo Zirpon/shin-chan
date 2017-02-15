@@ -51,8 +51,9 @@ php nginx 错误记录路径:
 ```
 8. 用whereis定位php路径 看清楚 php log 日志路径记在哪里`
 9. 导入数据库表
-10. 配置php.ini sendmail 的设置
-11. 配置/etc/hosts
-12. php显示超时要看 是不是sendmail的配置没有配置好 那个/etc/hosts没有配置好就会出现超时
-13. 服务器数据库备份脚本
-14. 始终没有搞懂为什么hostname怎么改才在邮件生效
+10.初始化 t_var 表1000000001
+11. 配置php.ini sendmail 的设置
+12. 配置/etc/hosts
+13. php显示超时要看 是不是sendmail的配置没有配置好 那个/etc/hosts没有配置好就会出现超时
+14. 服务器数据库备份脚本
+15. 始终没有搞懂为什么hostname怎么改才在邮件生效
