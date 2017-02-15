@@ -110,7 +110,7 @@
 
 			$arr = array($account, $type);
 			//var_dump($arr);
-			$result = $db->p("proc_get_charlist", $arr);
+			$result = $db->db_proc("proc_get_charlist", $arr);
 			$rows = $result->fetch_assoc();
 			//var_dump($rows);
 			if ($rows["guid"] != 0) {
