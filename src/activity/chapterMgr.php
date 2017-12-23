@@ -54,7 +54,7 @@ class chapterMgr extends handler
 		$sql = "CREATE TABLE `$tableName` (
 						`rank` int(11) NOT NULL,
   						`guid` int(11) NOT NULL,
- 						`name` varchar(50) NOT NULL,
+						`name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
 						`sex` int(11) NOT NULL,
   						`star` int(11) NOT NULL,
   						`score` int(11) NOT NULL,
